@@ -116,7 +116,6 @@ class HomeController: UITableViewController {
         NotificationCenter.default.removeObserver(self)
         let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)
         let privateKey = UserDefaults.standard.string(forKey: Constants.nearPrivateKey.rawValue)
-        print(self.videoIdForFunction!)
         near.viewUserWatchHistory(accountName: accountName!, videoId: self.videoIdForFunction!) { result in
             switch result {
             case .success(let response):
