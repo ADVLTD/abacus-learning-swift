@@ -19,7 +19,7 @@ class HomeController: UITableViewController {
     var playerViewController = AVPlayerViewController()
     var playerView = AVPlayer()
     
-    var videoId = ["011", "012", "013", "014"]
+    var videoId = ["01", "02", "03", "04"]
     var videoTitle = ["Near Video 1", "Near Video 2", "Near Video 3", "Near Video 4"]
     var videoURL = [
         "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4",
@@ -101,7 +101,6 @@ class HomeController: UITableViewController {
         navigationController?.setViewControllers([vc], animated: true)
         
         UserDefaults.standard.removeObject(forKey: Constants.nearAccountName.rawValue)
-        UserDefaults.standard.removeObject(forKey: Constants.nearAcountBalance.rawValue)
         UserDefaults.standard.removeObject(forKey: Constants.nearPublicKey.rawValue)
         UserDefaults.standard.removeObject(forKey: Constants.nearPrivateKey.rawValue)
     }
@@ -122,17 +121,20 @@ class HomeController: UITableViewController {
                 if response == false {
                     self.near.saveUserVideoDetails(accountName: accountName!, videoId: self.videoIdForFunction!, privateKey: privateKey!) { sucess in
                         self.near.sendToken(accountName: accountName!, videoId: self.videoIdForFunction!, privateKey: privateKey!) { success in
-                            if sucess {
-                                DispatchQueue.main.async {
+                            DispatchQueue.main.async {
+                                if sucess {
                                     let vc = SettingsController()
                                     vc.getBalance()
+                                    self.showToast(message: "Near token added to your wallet.")
+                                } else {
+                                    self.showAlert(title: "Error", message: "Something went wrong. Please try again", actionTitle: "ok")
                                 }
                             }
                         }
                     }
                 } else if response == true {
                     DispatchQueue.main.async {
-                        self.showAlert(title: "No Reward Alert", message: "No reward for this video will be awarded as You have already watched this video!", actionTitle: "Ok")
+                        self.showToast(message: "No reward for this video will be awarded as You have already watched this video.")
                     }
                 }
             case .failure(let error):

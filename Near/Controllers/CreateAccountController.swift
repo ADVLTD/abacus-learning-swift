@@ -122,11 +122,11 @@ class CreateAccountController: UIViewController {
                         self.showPassphraseController(response: response)
                     } else if response.statusCode != nil {
                         self.activityIndicator.removeFromSuperview()
-                        self.showAlert(title: "Error", message: "Account already exists. Please check your account name and try again !", actionTitle: "Ok")
+                        self.showAlert(title: "Error", message: "Account already exists. Please check your account name and try again !", actionTitle: "ok")
                     }
                 case .failure(let error):
                     self.activityIndicator.removeFromSuperview()
-                    self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "Ok")
+                    self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "ok")
                 }
             }
         }

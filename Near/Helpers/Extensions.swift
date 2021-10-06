@@ -100,3 +100,35 @@ extension UIColor {
         return UIColor(red: 31/255, green: 32/255, blue: 34/255, alpha: 1)
     }
 }
+
+extension UIViewController {
+    
+    func showToast(message : String) {
+        guard let window = UIApplication.shared.keyWindow else { return }
+        let toastLabel = UILabel()
+        toastLabel.text = message
+        toastLabel.textAlignment = .center
+        toastLabel.backgroundColor = UIColor.grey()
+        toastLabel.textColor = .white
+        toastLabel.font = .systemFont(ofSize: 18)
+        toastLabel.numberOfLines = 0
+        toastLabel.layer.cornerRadius = 10
+        toastLabel.layer.masksToBounds = true
+        toastLabel.clipsToBounds  =  true
+        
+        let textSize = toastLabel.intrinsicContentSize
+        let labelWidth = min(textSize.width, window.frame.width - 40)
+        let labelHeight = (textSize.width / window.frame.width) * 30
+        let adjustedHeight = max(labelHeight, textSize.height + 20)
+        
+        toastLabel.frame = CGRect(x: 20, y: (window.frame.height - 90) - adjustedHeight, width: labelWidth + 20, height: adjustedHeight)
+        toastLabel.center.x = window.center.x
+        window.addSubview(toastLabel)
+        
+        UIView.animate(withDuration: 10) {
+            toastLabel.alpha = 0
+        } completion: { _ in
+            toastLabel.removeFromSuperview()
+        }
+    }
+}

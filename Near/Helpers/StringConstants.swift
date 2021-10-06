@@ -13,7 +13,6 @@ enum Constants: String {
     case nearAccountName = "nearAccountName"
     case nearPublicKey = "nearPublicKey"
     case nearPrivateKey = "nearPrivateKey"
-    case nearAcountBalance = "nearAcountBalance"
     
     // Url constants
     case getDataFromURL = "http://localhost:3000/"
@@ -25,4 +24,5 @@ enum Constants: String {
     case viewUserWatchHistoryURL = "http://localhost:3000/view"
     case saveVideoDetailsAndSendTokenURL = "http://localhost:3000/call"
     case viewActivityURL = "https://explorer.testnet.near.org/transactions/"
+    case generateLinkDropURL = "http://localhost:3000/generate-drop"
 }

@@ -11,6 +11,7 @@
 		95152A4E26FDF35900DD240A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4D26FDF35900DD240A /* HomeController.swift */; };
 		955F22552705BF77006D7D6F /* AccountActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F22542705BF77006D7D6F /* AccountActivityCell.swift */; };
 		955F22572705CA64006D7D6F /* TransactionStatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F22562705CA64006D7D6F /* TransactionStatusController.swift */; };
+		958F0259270DB7E8003D6706 /* InviteFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F0258270DB7E8003D6706 /* InviteFriendController.swift */; };
 		95AF482A26FD9F9600DE684C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF482926FD9F9600DE684C /* AppDelegate.swift */; };
 		95AF482C26FD9F9600DE684C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF482B26FD9F9600DE684C /* SceneDelegate.swift */; };
 		95AF482E26FD9F9600DE684C /* CreateAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF482D26FD9F9600DE684C /* CreateAccountController.swift */; };
@@ -53,6 +54,7 @@
 		95152A4D26FDF35900DD240A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		955F22542705BF77006D7D6F /* AccountActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivityCell.swift; sourceTree = "<group>"; };
 		955F22562705CA64006D7D6F /* TransactionStatusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStatusController.swift; sourceTree = "<group>"; };
+		958F0258270DB7E8003D6706 /* InviteFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendController.swift; sourceTree = "<group>"; };
 		95AF482626FD9F9600DE684C /* Near.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Near.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95AF482926FD9F9600DE684C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95AF482B26FD9F9600DE684C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				95152A4D26FDF35900DD240A /* HomeController.swift */,
 				95DACBC727043E56001736AF /* SettingsController.swift */,
 				955F22562705CA64006D7D6F /* TransactionStatusController.swift */,
+				958F0258270DB7E8003D6706 /* InviteFriendController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				955F22572705CA64006D7D6F /* TransactionStatusController.swift in Sources */,
 				95D3B56F270AB94E00568ED3 /* StringConstants.swift in Sources */,
 				95DACBC827043E56001736AF /* SettingsController.swift in Sources */,
+				958F0259270DB7E8003D6706 /* InviteFriendController.swift in Sources */,
 				95AF482E26FD9F9600DE684C /* CreateAccountController.swift in Sources */,
 				95AF486526FDAADA00DE684C /* NearRestAPI.swift in Sources */,
 				95EFA4552701A2E700703744 /* SignInController.swift in Sources */,

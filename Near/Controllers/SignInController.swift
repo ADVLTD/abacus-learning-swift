@@ -109,11 +109,11 @@ class SignInController: UIViewController {
                         UserDefaults.standard.set(response.publicKey, forKey: Constants.nearPublicKey.rawValue)
                     } else if response.success == false {
                         self.activityIndicator.removeFromSuperview()
-                        self.showAlert(title: "Error", message: "Account does not exist. Please check your PassPhrase and try again !", actionTitle: "Ok")
+                        self.showAlert(title: "Error", message: "Account does not exist. Please check your PassPhrase and try again !", actionTitle: "ok")
                     }
                 case .failure(let error):
                     self.activityIndicator.removeFromSuperview()
-                    self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "Ok")
+                    self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "ok")
                 }
             }
         }

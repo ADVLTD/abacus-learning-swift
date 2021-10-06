@@ -62,6 +62,37 @@ struct Permission: Codable {
     let permission_kind: String?
 }
 
+//Data model for JSON object returned from server for Genrating LinkDrop
+
+struct GenerateLinkDrop: Decodable {
+    var secretKey: String?
+    var publicKey: String?
+    var amount: String?
+    var timeStamp: Int?
+    
+    private enum NewKeyPairKeys: String, CodingKey {
+        case secretKey
+        case publicKey = "public_key"
+        case amount
+        case timeStamp = "ts"
+    }
+    
+    private enum GenerateLinkDropKeys: String, CodingKey {
+        case newKeyPair
+    }
+    
+    init(from decoder: Decoder) throws {
+        if let generateLinkDropContainer = try? decoder.container(keyedBy: GenerateLinkDropKeys.self) {
+            if let newKeyPairContainer = try? generateLinkDropContainer.nestedContainer(keyedBy: NewKeyPairKeys.self, forKey: .newKeyPair) {
+                self.secretKey = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .secretKey)
+                self.publicKey = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .publicKey)
+                self.amount = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .amount)
+                self.timeStamp = try newKeyPairContainer.decodeIfPresent(Int.self, forKey: .timeStamp)
+            }
+        }
+    }
+}
+
 
 //Data model for JSON object returned from server for Transaction Details
 
