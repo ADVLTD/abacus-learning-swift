@@ -75,7 +75,11 @@ class TransactionStatusController: UIViewController {
     }
     
     @objc func viewActivityButtonTapped() {
-        let url = "\(Constants.viewActivityURL.rawValue)\(hashString!)"
+        guard let hashString = hashString else {
+            showToast(message: "Hash String not found.")
+            return
+        }
+        let url = "\(Constants.viewActivityURL.rawValue)\(hashString)"
         if let url = URL(string: url) {
             UIApplication.shared.open(url)
         }
@@ -106,9 +110,14 @@ class TransactionStatusController: UIViewController {
     //MARK: Helper Functions
     
     func transactionDetails() {
-        guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else { return }
-        activityLabel.text = "Activity: \(activity!)"
-        near.transactionStatus(accountName: accountName, hash: hashString!) { success in
+        guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
+              let activity = activity,
+              let hashString = hashString else {
+            showToast(message: "Account Name not found.")
+            return
+        }
+        activityLabel.text = "Activity: \(activity)"
+        near.transactionStatus(accountName: accountName, hash: hashString) { success in
             DispatchQueue.main.async {
                 if success {
                     self.statusLabel.text = "Status: Successfull"

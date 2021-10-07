@@ -13,13 +13,14 @@ class CreateAccountController: UIViewController {
     
     let near = NearRestAPI()
     let activityIndicator = ActivityIndicator()
+    let accountNameContainer = UIView()
     
     let accountNameTextField: UITextField = {
         let tf = UITextField()
         tf.StyleTextField(placeholder: "Enter AccountName", isSecureText: false)
         return tf
     }()
-    let accountNameContainer = UIView()
+    
     let accountNameLogo: UIImage! = {
         let button = UIImage(systemName: "person.fill")?.withTintColor(.link, renderingMode: .alwaysOriginal)
         return button
@@ -118,6 +119,7 @@ class CreateAccountController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
+                    self.activityIndicator.removeFromSuperview()
                     if response.passPhrase != nil {
                         self.showPassphraseController(response: response)
                     } else if response.statusCode != nil {

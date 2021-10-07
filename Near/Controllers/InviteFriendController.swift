@@ -7,12 +7,12 @@
 
 import UIKit
 
-class InviteFriendController: UIViewController {
+class InviteFriendController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: Properties/Variables
     
     let near = NearRestAPI()
-    var secretKey: String?
+    var linkDropArray: [GenerateLinkDrop] = []
     let amountContainer = UIView()
     
     let amountTextField: UITextField = {
@@ -36,32 +36,21 @@ class InviteFriendController: UIViewController {
         return button
     }()
     
-    let containerView = UIView()
-    
-    let ammountLabel: UILabel = {
+    var linkDropLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.text = "LinkDrops"
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     
-    let copyLinkButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Copy Link", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(copyLinkButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .link
-        button.layer.cornerRadius = 10
-        return button
-    }()
-    
-    let reclaimButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Reclaim Near", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(reclaimButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .link
-        button.layer.cornerRadius = 10
-        return button
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = UIColor.grey()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(LinkDropCell.self, forCellReuseIdentifier: LinkDropCell.identifier)
+        return tableView
     }()
     
     //MARK: Init Fucntions
@@ -69,7 +58,6 @@ class InviteFriendController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureController()
-        containerView.isHidden = true
     }
     
     //MARK: Selector Functions
@@ -85,41 +73,25 @@ class InviteFriendController: UIViewController {
         }
         if amount > "1" {
             near.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
-                switch success {
-                case .success(let response):
-                    self.secretKey = response.secretKey
-                    DispatchQueue.main.async {
-                        self.containerView.isHidden = false
-                        self.ammountLabel.text = "Amount: \(response.amount!) Near"
+                DispatchQueue.main.async {
+                    switch success {
+                    case .success(let response):
+                        if response.secretKey == nil {
+                            self.showToast(message: "Something went wrong.")
+                        } else {
+                            self.linkDropLabel.isHidden = false
+                            self.linkDropArray.append(response)
+                            self.linkDropArray.count
+                            self.amountTextField.text = nil
+                            self.tableView.reloadData()
+                        }
+                    case .failure(let error):
+                        self.showToast(message: error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
                 }
             }
         } else {
             showToast(message: "The amount Should be greater than 1 Near.")
-        }
-    }
-    
-    @objc func copyLinkButtonTapped() {
-        let url = "https://wallet.testnet.near.org/create/testnet/\(secretKey!)"
-        UIPasteboard.general.string = url
-    }
-    
-    @objc func reclaimButtonTapped() {
-        guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
-              let secretKey = self.secretKey else {
-            return
-        }
-        near.reclaimNear(accountName: accountName, secretKey: secretKey) { success in
-            DispatchQueue.main.async {
-                if success {
-                    self.showToast(message: "Near tokens reclaimed!")
-                    self.containerView.removeFromSuperview()
-                } else {
-                    self.showToast(message: "Error reclaiming Near tokens. Try Again!")
-                }
-            }
         }
     }
     
@@ -140,18 +112,61 @@ class InviteFriendController: UIViewController {
         generateLinkDropButton.anchor(top: amountContainer.bottomAnchor, paddingTop: 30, width: 200, height: 45)
         generateLinkDropButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        view.addSubview(containerView)
-        containerView.anchor(top: generateLinkDropButton.bottomAnchor, paddingTop: 50, left: view.leftAnchor, paddingLeft: 10, right: view.rightAnchor, paddingRight: 10, bottom: view.bottomAnchor, paddingBottom: 50)
+        view.addSubview(linkDropLabel)
+        linkDropLabel.isHidden = true
+        linkDropLabel.anchor(top: generateLinkDropButton.bottomAnchor, paddingTop: 30, left: view.leftAnchor, paddingLeft: 10, right: view.rightAnchor, paddingRight: 10, height: 45)
         
-        containerView.addSubview(ammountLabel)
-        ammountLabel.anchor(top: containerView.topAnchor, paddingTop: 20, left: containerView.leftAnchor, paddingLeft: 20, right: containerView.rightAnchor, paddingRight: 20, height: 45)
+        view.addSubview(tableView)
+        tableView.anchor(top: linkDropLabel.bottomAnchor, paddingTop: 30, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, bottom: view.bottomAnchor, paddingBottom: 50)
+    }
+    
+    //MARK: TableView Functions
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return linkDropArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: LinkDropCell.identifier, for: indexPath) as! LinkDropCell
+        cell.ammountLabel.text = "Amount: \(linkDropArray[indexPath.row].amount!)"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        containerView.addSubview(copyLinkButton)
-        copyLinkButton.anchor(top: ammountLabel.bottomAnchor, paddingTop: 20, width: 200, height: 45)
-        copyLinkButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        
-        containerView.addSubview(reclaimButton)
-        reclaimButton.anchor(top: copyLinkButton.bottomAnchor, paddingTop: 20, width: 200, height: 45)
-        reclaimButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        let alert = UIAlertController(title: "Choose one option", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Copy Link", style: .default, handler: { actionSheet in
+            guard let secretKey = self.linkDropArray[indexPath.row].secretKey else {
+                return
+            }
+            let url = "https://wallet.testnet.near.org/create/testnet/\(secretKey)"
+            UIPasteboard.general.string = url
+        }))
+        alert.addAction(UIAlertAction(title: "Reclaim Near", style: .default, handler: { actionSheet in
+            guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
+                  let secretKey = self.linkDropArray[indexPath.row].secretKey else {
+                      return
+                  }
+            self.near.reclaimNear(accountName: accountName, secretKey: secretKey) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        self.showToast(message: "Near tokens reclaimed!")
+                        self.linkDropArray.remove(at: indexPath.row)
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.reloadData()
+                        if self.linkDropArray.count == 0 {
+                            self.linkDropLabel.isHidden = true
+                        }
+                    } else {
+                        self.showToast(message: "Error reclaiming Near tokens. Try Again!")
+                    }
+                }
+            }
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }

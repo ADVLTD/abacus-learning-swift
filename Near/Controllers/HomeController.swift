@@ -113,14 +113,17 @@ class HomeController: UITableViewController {
     @objc private func videoDidEnd() {
         dismiss(animated: true)
         NotificationCenter.default.removeObserver(self)
-        let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)
-        let privateKey = UserDefaults.standard.string(forKey: Constants.nearPrivateKey.rawValue)
-        near.viewUserWatchHistory(accountName: accountName!, videoId: self.videoIdForFunction!) { result in
+        guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
+              let privateKey = UserDefaults.standard.string(forKey: Constants.nearPrivateKey.rawValue) else {
+                  showToast(message: "AccountName or PrivateKey not found.")
+                  return
+              }
+        near.viewUserWatchHistory(accountName: accountName, videoId: self.videoIdForFunction!) { result in
             switch result {
             case .success(let response):
                 if response == false {
-                    self.near.saveUserVideoDetails(accountName: accountName!, videoId: self.videoIdForFunction!, privateKey: privateKey!) { sucess in
-                        self.near.sendToken(accountName: accountName!, videoId: self.videoIdForFunction!, privateKey: privateKey!) { success in
+                    self.near.saveUserVideoDetails(accountName: accountName, videoId: self.videoIdForFunction!, privateKey: privateKey) { sucess in
+                        self.near.sendToken(accountName: accountName, videoId: self.videoIdForFunction!, privateKey: privateKey) { success in
                             DispatchQueue.main.async {
                                 if sucess {
                                     let vc = SettingsController()

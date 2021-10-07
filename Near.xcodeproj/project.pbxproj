@@ -29,6 +29,7 @@
 		95DACBC627043565001736AF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC527043565001736AF /* ActivityIndicator.swift */; };
 		95DACBC827043E56001736AF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC727043E56001736AF /* SettingsController.swift */; };
 		95DACBCA270446E0001736AF /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */; };
+		95EF64DE270F180F00D67F0E /* LinkDropCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EF64DD270F180F00D67F0E /* LinkDropCell.swift */; };
 		95EFA4552701A2E700703744 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFA4542701A2E700703744 /* SignInController.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		95DACBC527043565001736AF /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		95DACBC727043E56001736AF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
+		95EF64DD270F180F00D67F0E /* LinkDropCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDropCell.swift; sourceTree = "<group>"; };
 		95EFA4542701A2E700703744 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 				95DACBC527043565001736AF /* ActivityIndicator.swift */,
 				95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */,
 				955F22542705BF77006D7D6F /* AccountActivityCell.swift */,
+				95EF64DD270F180F00D67F0E /* LinkDropCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */,
 				95AF482A26FD9F9600DE684C /* AppDelegate.swift in Sources */,
 				95152A4E26FDF35900DD240A /* HomeController.swift in Sources */,
+				95EF64DE270F180F00D67F0E /* LinkDropCell.swift in Sources */,
 				95AF482C26FD9F9600DE684C /* SceneDelegate.swift in Sources */,
 				95AF486826FDAB7700DE684C /* NearAPIDataModel.swift in Sources */,
 				95AF483426FD9F9600DE684C /* Near.xcdatamodeld in Sources */,

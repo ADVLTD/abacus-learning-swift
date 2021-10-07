@@ -12,6 +12,7 @@ class PassPhraseController: UIViewController {
     //MARK: - Properties/Variables
     
     var accountCreationModel: CreateAccountModel?
+    let near = NearRestAPI()
     
     let passphraseTextView: UITextView = {
         let tf = UITextView()
@@ -26,7 +27,7 @@ class PassPhraseController: UIViewController {
     
     let doneButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Done", for: .normal)
+        button.setTitle("Continue", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .link
         button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
@@ -64,6 +65,30 @@ class PassPhraseController: UIViewController {
     
     @objc func doneButtonTapped() {
         UIPasteboard.general.string = passphraseTextView.text
-        dismiss(animated: true, completion: nil)
+        guard let passPhrase = passphraseTextView.text else { return }
+        near.signInUser(passPhrase: passPhrase) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if response.success == true {
+                        self.showHomeController()
+                        UserDefaults.standard.set(response.accountName, forKey: Constants.nearAccountName.rawValue)
+                        UserDefaults.standard.set(response.privateKey, forKey: Constants.nearPrivateKey.rawValue)
+                        UserDefaults.standard.set(response.publicKey, forKey: Constants.nearPublicKey.rawValue)
+                    } else if response.success == false {
+                        self.showToast(message: "Account does not exist. Please check your PassPhrase and try again !")
+                    }
+                case .failure(let error):
+                    self.showToast(message: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    //MARK: Helper Functions
+    
+    func showHomeController() {
+        let vc = HomeController()
+        navigationController?.setViewControllers([vc], animated: true)
     }
 }

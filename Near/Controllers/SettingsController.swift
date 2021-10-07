@@ -21,7 +21,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         return view
     }()
     
-    lazy var accountNameLabel: UILabel = {
+    var accountNameLabel: UILabel = {
         let label = UILabel()
         label.text = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)
         label.numberOfLines = 0
@@ -130,7 +130,11 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Helper Functions
     
     func getAccountActivity() {
-        near.getAccountActivity(accountName: UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)!) { activities in
+        guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else {
+            showToast(message: "Account Name not found")
+            return
+        }
+        near.getAccountActivity(accountName: accountName) { activities in
             self.activitiesArray = activities
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -171,13 +175,11 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         } else if tableNumber.action_kind! == "CREATE_ACCOUNT" {
             cell.actionKindLabel.text = "Activity: New account created"
         }
-        
-        cell.hashLabel.text = activitiesArray[indexPath.row].hash
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

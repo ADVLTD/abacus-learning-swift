@@ -82,12 +82,12 @@ struct GenerateLinkDrop: Decodable {
     }
     
     init(from decoder: Decoder) throws {
-        if let generateLinkDropContainer = try? decoder.container(keyedBy: GenerateLinkDropKeys.self) {
-            if let newKeyPairContainer = try? generateLinkDropContainer.nestedContainer(keyedBy: NewKeyPairKeys.self, forKey: .newKeyPair) {
-                self.secretKey = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .secretKey)
-                self.publicKey = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .publicKey)
-                self.amount = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .amount)
-                self.timeStamp = try newKeyPairContainer.decodeIfPresent(Int.self, forKey: .timeStamp)
+            if let generateLinkDropContainer = try? decoder.container(keyedBy: GenerateLinkDropKeys.self) {
+                if let newKeyPairContainer = try? generateLinkDropContainer.nestedContainer(keyedBy: NewKeyPairKeys.self, forKey: .newKeyPair) {
+                    self.secretKey = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .secretKey)
+                    self.publicKey = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .publicKey)
+                    self.amount = try newKeyPairContainer.decodeIfPresent(String.self, forKey: .amount)
+                    self.timeStamp = try newKeyPairContainer.decodeIfPresent(Int.self, forKey: .timeStamp)
             }
         }
     }

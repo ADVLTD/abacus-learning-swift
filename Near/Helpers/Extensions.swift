@@ -7,7 +7,10 @@
 
 import UIKit
 
+//Extension for constraints for ui elements, styling textfields and label
+
 extension UIView {
+    
     func anchor(top: NSLayoutYAxisAnchor? = nil, paddingTop: CGFloat? = 0, left: NSLayoutXAxisAnchor? = nil, paddingLeft: CGFloat? = 0, right: NSLayoutXAxisAnchor? = nil, paddingRight: CGFloat? = 0, bottom: NSLayoutYAxisAnchor? = nil, paddingBottom: CGFloat? = 0, width: CGFloat? = nil, height: CGFloat? = nil) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +77,8 @@ extension UIView {
     }
 }
 
+//Extension for styling textfields
+
 extension UITextField {
     
     func StyleTextField(placeholder: String, isSecureText: Bool) {
@@ -87,11 +92,15 @@ extension UITextField {
     }
 }
 
+//Extension for UI background color
+
 extension UIColor {
     static func grey() -> UIColor {
         return UIColor(red: 31/255, green: 32/255, blue: 34/255, alpha: 1)
     }
 }
+
+//Extension for Show Toast message
 
 extension UIViewController {
     
@@ -117,7 +126,7 @@ extension UIViewController {
         toastLabel.center.x = window.center.x
         window.addSubview(toastLabel)
         
-        UIView.animate(withDuration: 10) {
+        UIView.animate(withDuration: 6) {
             toastLabel.alpha = 0
         } completion: { _ in
             toastLabel.removeFromSuperview()

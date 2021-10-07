@@ -13,13 +13,14 @@ class SignInController: UIViewController {
     
     let near = NearRestAPI()
     let activityIndicator = ActivityIndicator()
+    let passPhraseContainer = UIView()
     
     let passPhraseTextField: UITextField = {
         let tf = UITextField()
         tf.StyleTextField(placeholder: "Enter PassPhrase", isSecureText: false)
         return tf
     }()
-    let passPhraseContainer = UIView()
+    
     let passPhraseLogo: UIImage! = {
         let button = UIImage(systemName: "signature")?.withTintColor(.link, renderingMode: .alwaysOriginal)
         return button
