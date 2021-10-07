@@ -60,7 +60,7 @@ class PassPhraseController: UIViewController {
         doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    //MARK: - Objc Functions
+    //MARK: Selector Functions
     
     @objc func doneButtonTapped() {
         UIPasteboard.general.string = passphraseTextView.text

@@ -9,6 +9,8 @@ import UIKit
 
 class InviteFriendController: UIViewController {
     
+    //MARK: Properties/Variables
+    
     let near = NearRestAPI()
     var secretKey: String?
     let amountContainer = UIView()
@@ -62,11 +64,15 @@ class InviteFriendController: UIViewController {
         return button
     }()
     
+    //MARK: Init Fucntions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureController()
         containerView.isHidden = true
     }
+    
+    //MARK: Selector Functions
     
     @objc func generateLinkDropButtonTapped() {
         guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
@@ -116,6 +122,8 @@ class InviteFriendController: UIViewController {
             }
         }
     }
+    
+    //MARK: Configuration Functions
     
     func configureController() {
         view.backgroundColor = UIColor.grey()

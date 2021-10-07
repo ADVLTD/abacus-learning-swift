@@ -94,7 +94,7 @@ class HomeController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK: - Objc Funtions
+    //MARK: Selector Functions
     
     @objc private func logOutButtonTapped() {
         let vc = CreateAccountController()

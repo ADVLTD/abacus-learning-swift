@@ -87,18 +87,11 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         getBalance()
     }
     
+    //MARK: Selector Functions
+    
     @objc func inviteFriendButtonTapped() {
         let vc = InviteFriendController()
         navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func getAccountActivity() {
-        near.getAccountActivity(accountName: UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)!) { activities in
-            self.activitiesArray = activities
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     //MARK: - Configuration Functions
@@ -132,6 +125,28 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         containerView.addSubview(tableView)
         tableView.anchor(top: accountActivityLabel.bottomAnchor, paddingTop: 10, left: containerView.leftAnchor, paddingLeft: 5, right: containerView.rightAnchor, paddingRight: 5, bottom: containerView.bottomAnchor, paddingBottom: 5)
         
+    }
+    
+    //MARK: - Helper Functions
+    
+    func getAccountActivity() {
+        near.getAccountActivity(accountName: UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)!) { activities in
+            self.activitiesArray = activities
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func getBalance() {
+        if let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) {
+            self.near.getBalance(accountName: accountName) { balance in
+                DispatchQueue.main.async {
+                    self.balanceLabel.text = "\(balance)  NEAR"
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     //MARK: - TableView Functions
@@ -185,16 +200,5 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         
         vc.hashString = activitiesArray[indexPath.row].hash
         present(vc, animated: true, completion: nil)
-    }
-    
-    func getBalance() {
-        if let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) {
-            self.near.getBalance(accountName: accountName) { balance in
-                DispatchQueue.main.async {
-                    self.balanceLabel.text = "\(balance)  NEAR"
-                    self.tableView.reloadData()
-                }
-            }
-        }
     }
 }

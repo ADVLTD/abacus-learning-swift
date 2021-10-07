@@ -7,7 +7,7 @@ This is a swift based Learning Application that works with near protocol .
 Use the git clone command in your terminal to clone the project.
 
 ```bash
-git clone 
+git clone https://gitlab.com/alsaabltd_and_headstrait/nr-sw-instructional-code.git
 ```
 
 ## Requirements to run

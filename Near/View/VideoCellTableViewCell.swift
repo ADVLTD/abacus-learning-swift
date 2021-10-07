@@ -10,6 +10,8 @@ import AVKit
 
 class VideoCellTableViewCell: UITableViewCell {
     
+    //MARK: - Properties/Variables
+    
     static let identifier = "videoCell"
     
     var videoTitleLabel: UILabel = {
@@ -20,6 +22,7 @@ class VideoCellTableViewCell: UITableViewCell {
         label.textAlignment = .center
         return label
     }()
+    
     var thumbNailImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = UIColor.grey()
@@ -33,6 +36,8 @@ class VideoCellTableViewCell: UITableViewCell {
         return iv
     }()
     
+    //MARK: - Init Functions
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -45,6 +50,8 @@ class VideoCellTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - Configuration Functions
     
     func configureCell() {
         contentView.backgroundColor = UIColor.grey()

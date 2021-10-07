@@ -109,7 +109,7 @@ class CreateAccountController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK: - Objc Functions
+    //MARK: Selector Functions
     
     @objc func createAccountButtonTapped() {
         guard let username = accountNameTextField.text, !username.isEmpty else { return }

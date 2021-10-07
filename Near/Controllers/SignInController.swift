@@ -92,7 +92,7 @@ class SignInController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK: - Objc Functions
+    //MARK: Selector Functions
     
     @objc func signInButtonTapped() {
         guard let passPhrase = passPhraseTextField.text, !passPhrase.isEmpty else { return }

@@ -60,16 +60,15 @@ class TransactionStatusController: UIViewController {
         return button
     }()
     
-    //MARK: - Init
+    //MARK: - Init Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePopUpWindow()
         transactionDetails()
-        
     }
     
-    //MARK: - Selectors
+    //MARK: - Selector Functions
     
     @objc func doneButtonTapped() {
         dismiss(animated: true, completion: nil)
@@ -103,6 +102,8 @@ class TransactionStatusController: UIViewController {
         doneButton.anchor(top: viewActivityButton.bottomAnchor, paddingTop: 30, width: 200, height: 45)
         doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
+    
+    //MARK: Helper Functions
     
     func transactionDetails() {
         guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else { return }

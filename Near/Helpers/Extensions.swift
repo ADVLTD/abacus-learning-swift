@@ -14,36 +14,29 @@ extension UIView {
         if let top = top {
             topAnchor.constraint(equalTo: top, constant: paddingTop!).isActive = true
         }
-        
         if let left = left {
             leftAnchor.constraint(equalTo: left, constant: paddingLeft!).isActive = true
         }
-        
         if let right = right {
             if let paddingRight = paddingRight{
                 rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
             }
         }
-        
         if let bottom = bottom {
             if let paddingBottom = paddingBottom {
                 bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom).isActive = true
             }
         }
-        
         if let width = width {
             widthAnchor.constraint(equalToConstant: width).isActive = true
         }
-        
         if let height = height {
             heightAnchor.constraint(equalToConstant: height).isActive = true
         }
     }
     
     func textContainerView(view: UIView, image: UIImage, textField: UITextField) {
-        
         view.backgroundColor = .clear
-        
         let imageView = UIImageView()
         imageView.image = image
         imageView.alpha = 1
@@ -63,7 +56,6 @@ extension UIView {
     
     func labelContainerView(view: UIView, image: UIImage, labelField: UILabel) {
         view.backgroundColor = .clear
-        
         let imageView = UIImageView()
         imageView.image = image
         imageView.alpha = 1
