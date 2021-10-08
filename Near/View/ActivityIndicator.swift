@@ -11,9 +11,12 @@ class ActivityIndicator: UIView {
     
     //MARK: - Properties/Variables
     
+    //Circles in the activity indicator
     let circle1 = UIView()
     let circle2 = UIView()
     let circle3 = UIView()
+    
+    //Array of the above circles
     var circleArray: [UIView] = []
     
     //MARK: - Init Functions
@@ -33,6 +36,7 @@ class ActivityIndicator: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         circleArray = [circle1, circle2, circle3]
         
+        //Configuring the above declared circles.
         for circle in circleArray {
             circle.frame = CGRect(x: -20, y: 5, width: 20, height: 20)
             circle.layer.cornerRadius = 10
@@ -42,6 +46,7 @@ class ActivityIndicator: UIView {
         }
     }
     
+    //Function to call when animation should start.
     func animate() {
         var delay: Double = 0
         for circle in circleArray {
@@ -50,6 +55,7 @@ class ActivityIndicator: UIView {
         }
     }
     
+    //Core animation of the circles
     func animateCircle(_ circle: UIView, delay: Double) {
         UIView.animate(withDuration: 0.5, delay: delay, options: .curveLinear) {
             circle.alpha = 1

@@ -11,8 +11,9 @@ class AccountActivityCell: UITableViewCell {
     
     //MARK: - Properties/Variables
     
+    //Singleton instance of identifier used to identify tableview cell.
     static let identifier = "cell"
-    
+    //Action kind label used to display the action_kind of the transaction, configured using anonymous closure pattern.
     var actionKindLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.grey()
@@ -39,8 +40,10 @@ class AccountActivityCell: UITableViewCell {
     
     //MARK: - Configuration Functions
     
+    //Given all the constraints and the background color for the elements displayed on the Home Screen.
     func configureCell() {
         contentView.backgroundColor = UIColor.grey()
+        //ActionKind label constraints
         contentView.addSubview(actionKindLabel)
         actionKindLabel.anchor(top: contentView.topAnchor, paddingTop: 0, left: contentView.leftAnchor, paddingLeft: 32, right: contentView.rightAnchor, paddingRight: 32, height: 40)
     }

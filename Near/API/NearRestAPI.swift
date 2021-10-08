@@ -11,18 +11,24 @@ import CoreMedia
 
 class NearRestAPI {
     
+    //Singleton Object for NearResrAPI
+    static let shared = NearRestAPI()
+    
     //MARK: - GET Requests
     
     //Get Account Balance Function
     //This Function is used to fetch the account balance for the current user.
     
     func getBalance(accountName: String, completion: @escaping (String) -> Void) {
+        //URL for getting account balance from server
         let url = "\(Constants.getBalanceURL.rawValue)\(accountName)"
+        //Hitting the API using URL
         URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
             guard error == nil, let data = data else {
                 print("Something went wrong \(String(describing: error?.localizedDescription))")
                 return
             }
+            //Converting the data recieved from API into String
             if let stringResponse = String(data: data, encoding: .utf8) {
                 completion(stringResponse)
             }
@@ -30,7 +36,9 @@ class NearRestAPI {
     }
     
     func getAccountActivity(accountName: String, completion: @escaping ([AccountActivity]) -> Void) {
+        //URL for getting account activity from server
         let url = "\(Constants.getAccountActivityURL.rawValue)\(accountName)/activity?limit=10"
+        //Hitting the API using URL
         URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
             guard error == nil, let data = data else {
                 print("Something went wrong \(String(describing: error?.localizedDescription))")
@@ -38,6 +46,7 @@ class NearRestAPI {
             }
             var result: [AccountActivity]?
             do {
+                //Decoding the data into array of AccountActivity objects
                 result = try JSONDecoder().decode([AccountActivity].self, from: data)
             } catch {
                 print("Error Converting data!!")

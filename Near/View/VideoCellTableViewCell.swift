@@ -12,8 +12,9 @@ class VideoCellTableViewCell: UITableViewCell {
     
     //MARK: - Properties/Variables
     
+    //Singleton instance of identifier used to identify tableview cell.
     static let identifier = "videoCell"
-    
+    //Video title label configured using anonymous closure pattern
     var videoTitleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.grey()
@@ -22,7 +23,7 @@ class VideoCellTableViewCell: UITableViewCell {
         label.textAlignment = .center
         return label
     }()
-    
+    //Video thumbnail configured using anonymous closure pattern
     var thumbNailImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = UIColor.grey()
@@ -30,6 +31,7 @@ class VideoCellTableViewCell: UITableViewCell {
         iv.layer.masksToBounds = true
         return iv
     }()
+    //Play button configured using anonymous closure pattern
     var playButton: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(systemName: "play.fill")
@@ -53,21 +55,23 @@ class VideoCellTableViewCell: UITableViewCell {
     
     //MARK: - Configuration Functions
     
+    //Given all the constraints and the background color for the elements displayed on the Home Screen.
     func configureCell() {
         contentView.backgroundColor = UIColor.grey()
-        
+        //Video Title Constraints
         contentView.addSubview(videoTitleLabel)
         videoTitleLabel.anchor(top: contentView.topAnchor, paddingTop: 6, left: contentView.leftAnchor, right: contentView.rightAnchor)
-        
+        //Video thumbnail Constraints
         contentView.addSubview(thumbNailImageView)
         thumbNailImageView.anchor(top: videoTitleLabel.bottomAnchor, paddingTop: 6, left: contentView.leftAnchor, paddingLeft: 6, right: contentView.rightAnchor, paddingRight: 6, bottom: contentView.bottomAnchor, paddingBottom: 6)
-        
+        //Play button Constraints
         thumbNailImageView.addSubview(playButton)
         playButton.anchor(width: 30, height: 30)
         playButton.centerXAnchor.constraint(equalTo: thumbNailImageView.centerXAnchor).isActive = true
         playButton.centerYAnchor.constraint(equalTo: thumbNailImageView.centerYAnchor).isActive = true
     }
     
+    //Passing all the data to the elements to be displayed on the screen. Elements are play button, video title and video thumbnail.
     func customVideoCellInit(title: String, videoURL: String, videoId: String) {
         self.videoTitleLabel.text = title
         guard let url = URL(string: videoURL) else { return }
@@ -76,6 +80,7 @@ class VideoCellTableViewCell: UITableViewCell {
         }
     }
     
+    //Getting the thumbnail from the video url using AVFoundation.
     func getThumbnailFromVideoURL(url: URL, completion: @escaping ((_ image: UIImage) -> Void)) {
         DispatchQueue.global().async {
 
