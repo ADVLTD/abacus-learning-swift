@@ -112,7 +112,8 @@ class CreateAccountController: UIViewController {
     
     @objc func createAccountButtonTapped() {
         //Checking the account name is not nil and the textfield is not empty
-        guard let username = accountNameTextField.text, !username.isEmpty else { return }
+        guard let username = accountNameTextField.text?.replacingOccurrences(of: " ", with: ""), !username.isEmpty else { return }
+        print(username)
         //Loading animation initiated
         activityIndicator.animate()
         //Create user function called from NearRestApi file.
@@ -133,7 +134,7 @@ class CreateAccountController: UIViewController {
                         //loading animation removed
                         self.activityIndicator.removeFromSuperview()
                         //showing alert message for error
-                        self.showAlert(title: "Error", message: "Account already exists. Please check your account name and try again !", actionTitle: "ok")
+                        self.showAlert(title: "Error", message: "Please check your account name and try again !", actionTitle: "ok")
                     }
                 //if the result from server is failure
                 case .failure(let error):

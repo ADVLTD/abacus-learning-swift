@@ -87,7 +87,6 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                         } else {
                             self.linkDropLabel.isHidden = false
                             self.linkDropArray.append(response)
-                            self.linkDropArray.count
                             self.amountTextField.text = nil
                             self.tableView.reloadData()
                         }

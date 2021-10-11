@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4B26FDE55D00DD240A /* PassPhraseController.swift */; };
 		95152A4E26FDF35900DD240A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4D26FDF35900DD240A /* HomeController.swift */; };
+		954BF37D271417D8008BABA2 /* CreateAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */; };
+		954BF37F27141C16008BABA2 /* SignInAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */; };
+		954BF38127142C5F008BABA2 /* AccountActivityAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF38027142C5F008BABA2 /* AccountActivityAPIUserTests.swift */; };
+		954BF383271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF382271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift */; };
 		955F22552705BF77006D7D6F /* AccountActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F22542705BF77006D7D6F /* AccountActivityCell.swift */; };
 		955F22572705CA64006D7D6F /* TransactionStatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F22562705CA64006D7D6F /* TransactionStatusController.swift */; };
 		958F0259270DB7E8003D6706 /* InviteFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F0258270DB7E8003D6706 /* InviteFriendController.swift */; };
@@ -53,6 +57,10 @@
 /* Begin PBXFileReference section */
 		95152A4B26FDE55D00DD240A /* PassPhraseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassPhraseController.swift; sourceTree = "<group>"; };
 		95152A4D26FDF35900DD240A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAPIUserTests.swift; sourceTree = "<group>"; };
+		954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIUserTests.swift; sourceTree = "<group>"; };
+		954BF38027142C5F008BABA2 /* AccountActivityAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivityAPIUserTests.swift; sourceTree = "<group>"; };
+		954BF382271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHistroryAndTransactionAPIUserTests.swift; sourceTree = "<group>"; };
 		955F22542705BF77006D7D6F /* AccountActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivityCell.swift; sourceTree = "<group>"; };
 		955F22562705CA64006D7D6F /* TransactionStatusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStatusController.swift; sourceTree = "<group>"; };
 		958F0258270DB7E8003D6706 /* InviteFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendController.swift; sourceTree = "<group>"; };
@@ -145,6 +153,10 @@
 			isa = PBXGroup;
 			children = (
 				95AF484326FD9F9800DE684C /* NearTests.swift */,
+				954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */,
+				954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */,
+				954BF38027142C5F008BABA2 /* AccountActivityAPIUserTests.swift */,
+				954BF382271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift */,
 			);
 			path = NearTests;
 			sourceTree = "<group>";
@@ -376,7 +388,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				954BF38127142C5F008BABA2 /* AccountActivityAPIUserTests.swift in Sources */,
 				95AF484426FD9F9800DE684C /* NearTests.swift in Sources */,
+				954BF37D271417D8008BABA2 /* CreateAPIUserTests.swift in Sources */,
+				954BF37F27141C16008BABA2 /* SignInAPIUserTests.swift in Sources */,
+				954BF383271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
