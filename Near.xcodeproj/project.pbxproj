@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4B26FDE55D00DD240A /* PassPhraseController.swift */; };
 		95152A4E26FDF35900DD240A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4D26FDF35900DD240A /* HomeController.swift */; };
+		952A06FA271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */; };
 		954BF37D271417D8008BABA2 /* CreateAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */; };
 		954BF37F27141C16008BABA2 /* SignInAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */; };
 		954BF38127142C5F008BABA2 /* AccountActivityAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF38027142C5F008BABA2 /* AccountActivityAPIUserTests.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		95152A4B26FDE55D00DD240A /* PassPhraseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassPhraseController.swift; sourceTree = "<group>"; };
 		95152A4D26FDF35900DD240A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLinkDropAPIUserTests.swift; sourceTree = "<group>"; };
 		954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAPIUserTests.swift; sourceTree = "<group>"; };
 		954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIUserTests.swift; sourceTree = "<group>"; };
 		954BF38027142C5F008BABA2 /* AccountActivityAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivityAPIUserTests.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */,
 				954BF38027142C5F008BABA2 /* AccountActivityAPIUserTests.swift */,
 				954BF382271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift */,
+				952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */,
 			);
 			path = NearTests;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				954BF37D271417D8008BABA2 /* CreateAPIUserTests.swift in Sources */,
 				954BF37F27141C16008BABA2 /* SignInAPIUserTests.swift in Sources */,
 				954BF383271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift in Sources */,
+				952A06FA271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

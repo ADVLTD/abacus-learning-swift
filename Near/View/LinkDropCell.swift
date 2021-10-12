@@ -20,6 +20,12 @@ class LinkDropCell: UITableViewCell {
         return label
     }()
     
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
+    
     //MARK: Init Functions
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,5 +49,16 @@ class LinkDropCell: UITableViewCell {
         //Amount label constraints
         contentView.addSubview(ammountLabel)
         ammountLabel.anchor(top: contentView.topAnchor, paddingTop: 10, left: contentView.leftAnchor, paddingLeft: 10, right: contentView.rightAnchor, paddingRight: 10, height: 45)
+        contentView.addSubview(timeLabel)
+        timeLabel.anchor(top: ammountLabel.bottomAnchor, paddingTop: 10, left: contentView.leftAnchor, paddingLeft: 10, right: contentView.rightAnchor, paddingRight: 10, height: 45)
+    }
+    
+    func assignDateAndTime(timeStamp: Double) {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        let localDate = dateFormatter.string(from: date)
+        timeLabel.text = localDate
     }
 }

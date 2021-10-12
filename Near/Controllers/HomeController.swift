@@ -117,6 +117,7 @@ class HomeController: UITableViewController {
         UserDefaults.standard.removeObject(forKey: Constants.nearAccountName.rawValue)
         UserDefaults.standard.removeObject(forKey: Constants.nearPublicKey.rawValue)
         UserDefaults.standard.removeObject(forKey: Constants.nearPrivateKey.rawValue)
+        UserDefaults.standard.removeObject(forKey: Constants.nearLinkDropAArray.rawValue)
     }
     
     //Action for settings button
