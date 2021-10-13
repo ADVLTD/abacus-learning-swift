@@ -53,20 +53,24 @@ class CreateAccountController: UIViewController {
         super.viewDidLoad()
         configureLoginController()
     }
-    
+
     //MARK: - Configuration Functions
     
     func configureLoginController() {
         //Navigation bar configuration
         navigationItem.title = "Create Account"
-        navigationController?.navigationBar.prefersLargeTitles = false
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22, weight: .bold)]
+        
         //Background color for the page
         view.backgroundColor = UIColor.grey()
+        
         //constraints for the Near logo
         view.addSubview(nearLogo)
         nearLogo.anchor(top: view.topAnchor, paddingTop: 80, width: 250, height: 250)
         nearLogo.translatesAutoresizingMaskIntoConstraints = false
         nearLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
         //constraints for the Accout name Textfield
         view.addSubview(accountNameContainer)
         accountNameContainer.anchor(left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
@@ -74,15 +78,18 @@ class CreateAccountController: UIViewController {
         accountNameContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         accountNameContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         accountNameContainer.textContainerView(view: accountNameContainer, image: accountNameLogo, textField: accountNameTextField)
+        
         //constraints for the Create Account button
         view.addSubview(createAccountButton)
         createAccountButton.anchor(top: accountNameContainer.bottomAnchor, paddingTop: 35, width: 200, height: 45)
         createAccountButton.translatesAutoresizingMaskIntoConstraints = false
         createAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
         //constraints for the Loading animation
         view.addSubview(activityIndicator)
         activityIndicator.anchor(top: createAccountButton.bottomAnchor, paddingTop: 30, width: 150, height: 40)
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
         //constraints for the sign in button
         view.addSubview(signInButton)
         signInButton.anchor(bottom: view.bottomAnchor, paddingBottom: 50, width: 280, height: 35)
@@ -113,33 +120,45 @@ class CreateAccountController: UIViewController {
     @objc func createAccountButtonTapped() {
         //Checking the account name is not nil and the textfield is not empty
         guard let username = accountNameTextField.text?.replacingOccurrences(of: " ", with: ""), !username.isEmpty else { return }
-        print(username)
+        
         //Loading animation initiated
         activityIndicator.animate()
+        
         //Create user function called from NearRestApi file.
         NearRestAPI.shared.createUser(username: username) { result in
+            
             //using the main thread for executing the closure as it contains ui elements.
             DispatchQueue.main.async {
                 switch result {
+                    
                 //if the result from server is success
                 case .success(let response):
+                    
                     //loading animation removed
                     self.activityIndicator.removeFromSuperview()
+                    
                     //checking is passphrase is not empty/nil
                     if response.passPhrase != nil {
+                        
                         //navigate to passphrase screen to show pass phrase
                         self.showPassphraseController(response: response)
+                        
                     //checking if statusCode is not nil then an error has occured
                     } else if response.statusCode != nil {
+                        
                         //loading animation removed
                         self.activityIndicator.removeFromSuperview()
+                        
                         //showing alert message for error
                         self.showAlert(title: "Error", message: "Please check your account name and try again !", actionTitle: "ok")
                     }
+                    
                 //if the result from server is failure
                 case .failure(let error):
+                    
                     //loading animation removed
                     self.activityIndicator.removeFromSuperview()
+                    
                     //showing alert message for error
                     self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "ok")
                 }

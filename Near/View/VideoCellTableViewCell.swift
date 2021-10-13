@@ -14,6 +14,7 @@ class VideoCellTableViewCell: UITableViewCell {
     
     //Singleton instance of identifier used to identify tableview cell.
     static let identifier = "videoCell"
+    
     //Video title label configured using anonymous closure pattern
     var videoTitleLabel: UILabel = {
         let label = UILabel()

@@ -13,6 +13,7 @@ class AccountActivityCell: UITableViewCell {
     
     //Singleton instance of identifier used to identify tableview cell.
     static let identifier = "cell"
+    
     //Action kind label used to display the action_kind of the transaction, configured using anonymous closure pattern.
     var actionKindLabel: UILabel = {
         let label = UILabel()

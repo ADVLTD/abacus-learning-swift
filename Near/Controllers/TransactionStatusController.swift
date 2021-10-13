@@ -29,11 +29,13 @@ class TransactionStatusController: UIViewController {
     let activityLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
+        label.textColor = .white
         return label
     }()
     let statusLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
+        label.textColor = .white
         return label
     }()
     let viewActivityButton: UIButton = {
@@ -90,20 +92,25 @@ class TransactionStatusController: UIViewController {
     
     //Function for configuration of view.
     func configurePopUpWindow() {
+        
         //Background color for view
         view.backgroundColor = UIColor.grey()
+        
         //Constraints for activity label
         view.addSubview(activityContainer)
         activityContainer.anchor(top: view.topAnchor, paddingTop: 150, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
         activityContainer.labelContainerView(view: activityContainer, image: activityLogo, labelField: activityLabel)
+        
         //Constraints for status label
         view.addSubview(statusContainer)
         statusContainer.anchor(top: activityContainer.bottomAnchor, paddingTop: 30, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
         statusContainer.labelContainerView(view: statusContainer, image: statusLogo, labelField: statusLabel)
+        
         //Constraints for activity button
         view.addSubview(viewActivityButton)
         viewActivityButton.anchor(top: statusContainer.bottomAnchor, paddingTop: 30, width: 200, height: 45)
         viewActivityButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+       
         //Constraints for done button
         view.addSubview(doneButton)
         doneButton.anchor(top: viewActivityButton.bottomAnchor, paddingTop: 30, width: 200, height: 45)
@@ -114,6 +121,7 @@ class TransactionStatusController: UIViewController {
     
     //Function for getting the transaction details.
     func transactionDetails() {
+        
         //Checking that accountname, activity and hashstring is not nil.
         guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
               let activity = activity,
@@ -121,10 +129,13 @@ class TransactionStatusController: UIViewController {
             showToast(message: "Account Name not found.")
             return
         }
+        
         //Assigning text to activity label.
         activityLabel.text = "Activity: \(activity)"
+        
         //Using the transaction status function from NearRestAPI file
         NearRestAPI.shared.transactionStatus(accountName: accountName, hash: hashString) { success in
+            
             //Using main thread for UI elements
             DispatchQueue.main.async {
                 if success {

@@ -26,6 +26,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         label.text = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16)
+        label.textColor = .white
         return label
     }()
     var accountNameLogo: UIImage! = {
@@ -36,6 +37,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         let label = UILabel()
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16)
+        label.textColor = .white
         return label
     }()
     var balanceLogo: UIImage! = {
@@ -47,6 +49,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         label.text = "Account Activity:"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .white
         return label
     }()
     lazy var tableView: UITableView = {
@@ -85,6 +88,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Action for invite button
     @objc func inviteFriendButtonTapped() {
+        
         //Navigate to InviteFriend controller view
         let vc = InviteFriendController()
         navigationController?.pushViewController(vc, animated: true)
@@ -94,7 +98,6 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Function to configure navigation bar
     func configureNavigationBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Settings"
     }
     
@@ -102,24 +105,30 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     func configureSettingsController() {
         //Background color for view
         view.backgroundColor = UIColor.grey()
+        
         //Constraints for the container view that contains all the elements.
         view.addSubview(containerView)
         containerView.anchor(top: view.topAnchor, paddingTop: 150, left: view.leftAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, paddingBottom: 40)
+        
         //Constraints for accountname label.
         containerView.addSubview(accountNameContainer)
         accountNameContainer.anchor(top: containerView.topAnchor, paddingTop: 10, left: containerView.leftAnchor, paddingLeft: 32, right: containerView.rightAnchor, paddingRight: 32, height: 50)
         accountNameContainer.labelContainerView(view: accountNameContainer, image: accountNameLogo, labelField: accountNameLabel)
+        
         //Constraints for balance label.
         containerView.addSubview(balanceContainer)
         balanceContainer.anchor(top: accountNameContainer.bottomAnchor, paddingTop: 30, left: containerView.leftAnchor, paddingLeft: 32, right: containerView.rightAnchor, paddingRight: 32, height: 50)
         balanceContainer.labelContainerView(view: balanceContainer, image: balanceLogo, labelField: balanceLabel)
+        
         //Constraints for Invite friend button.
         containerView.addSubview(inviteFriendButton)
         inviteFriendButton.anchor(top: balanceContainer.bottomAnchor, paddingTop: 30, width: 250, height: 45)
         inviteFriendButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        
         //Constraints for account activity label.
         containerView.addSubview(accountActivityLabel)
         accountActivityLabel.anchor(top: inviteFriendButton.bottomAnchor, paddingTop: 30, left: containerView.leftAnchor, paddingLeft: 32, right: containerView.rightAnchor, paddingRight: 32, height: 45)
+        
         //Constraints for the tableview that account activity shows.
         containerView.addSubview(tableView)
         tableView.anchor(top: accountActivityLabel.bottomAnchor, paddingTop: 10, left: containerView.leftAnchor, paddingLeft: 5, right: containerView.rightAnchor, paddingRight: 5, bottom: containerView.bottomAnchor, paddingBottom: 5)
@@ -129,17 +138,22 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Function to get account activity from the server.
     func getAccountActivity() {
+        
         //Checking that accountname is not nil.
         guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else {
             showToast(message: "Account Name not found")
             return
         }
+        
         //Using the get account activity from NearRestAPI file
         NearRestAPI.shared.getAccountActivity(accountName: accountName) { activities in
+            
             //Assigning the activities array to the array declared above.
             self.activitiesArray = activities
+            
             //Using the main thread for UI operation
             DispatchQueue.main.async {
+                
                 //Reloading the tableview
                 self.tableView.reloadData()
             }
@@ -148,14 +162,19 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     //Function to get account balance from the server.
     func getBalance() {
+        
         //Checking that accountname is not nil.
         if let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) {
+            
             //Using the get account balance from NearRestAPI file
             NearRestAPI.shared.getBalance(accountName: accountName) { balance in
+                
                 //Using the main thread for UI operation
                 DispatchQueue.main.async {
+                   
                     //Assigning the balance to balance label
                     self.balanceLabel.text = "\(balance)  NEAR"
+                   
                     //Reloading the tableview
                     self.tableView.reloadData()
                 }
@@ -175,6 +194,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: AccountActivityCell.identifier, for: indexPath) as! AccountActivityCell
         let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)
         let tableNumber = activitiesArray[indexPath.row]
+        
         //Formatting the activity kind to more readable format.
         if tableNumber.action_kind! == "TRANSFER" && tableNumber.receiver_id! == accountName {
             cell.actionKindLabel.text = "Activity: Recieved Near"
@@ -198,9 +218,9 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     //Function for action on selecting any row in the tableview
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = TransactionStatusController()
-        vc.modalPresentationStyle = .fullScreen
         let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue)
         let tableNumber = activitiesArray[indexPath.row]
+       
         //Formatting the activity kind to more readable format.
         if tableNumber.action_kind! == "TRANSFER" && tableNumber.receiver_id! == accountName {
             vc.activity = "Recieved Near"

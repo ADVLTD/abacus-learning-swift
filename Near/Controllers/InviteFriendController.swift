@@ -39,6 +39,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
         label.text = "Active LinkDrops"
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .white
         label.isHidden = true
         return label
     }()
@@ -70,16 +71,15 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
               }
         
         //Checking for nil value in amount.
-        guard let amount = amountTextField.text, !amount.isEmpty else {
+        guard var amount = amountTextField.text, !amount.isEmpty else {
             showToast(message: "Please Check the amount and try again!")
             return
         }
-        
         //Checking if the value is greater than 1 Near
         if amount > "1" {
             
             //Using the generate link drop function from NearRestAPI file
-            NearRestAPI.shared.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
+            NearRestAPI.shared.generateLinkDrop(accountName: accountName, amount: "\(amount)000000000000000000000000", privateKey: privateKey) { success in
                 
                 //Using main thread.
                 DispatchQueue.main.async {
@@ -90,18 +90,30 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                         
                         //if the secretkey is nil
                         if response.newKeyPair?.secretKey == nil {
-                            self.showToast(message: "Something went wrong.")
+                            self.showToast(message: "Something went wrong. Try again!")
                         } else {
                             //if the secretkey is not nil
                             self.linkDropLabel.isHidden = false
+                            
+                            //Storing the response in an array.
                             self.linkDropArray.append(response)
+                            
+                            //Storing the array in UserDefaults for maintaining it throught the session.
                             do {
+                                
+                                //Converting the objects in array into JSON format to store it in userdefaults.
                                 let linkDropData = try? JSONEncoder().encode(self.linkDropArray)
-                                UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropAArray.rawValue)
+                                
+                                //Userdefaults storage
+                                UserDefaults.standard.set(linkDropData, forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)")
                             } catch {
                                 print("Error")
                             }
+                            
+                            //Clearing the textffield
                             self.amountTextField.text = nil
+                            
+                            //Reloading the table to show the data.
                             self.tableView.reloadData()
                         }
                         //if the completion is failure
@@ -125,7 +137,6 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
         view.backgroundColor = UIColor.grey()
         
         //Configuration of navigation bar
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Link Drop"
         
         //Constraints for amount textfield
@@ -152,8 +163,21 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
     
     //Function for determining number of rows in the tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropAArray.rawValue) {
+        
+        //Storing the data from userdefaaults into a variable and checking for nil value.
+        if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
+            
+            //Decoding the JSON data and converting to GenerateLinkDrop object
             let linkDropArray = try! JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData)
+            
+            //Hide the Active Linkdrop label when count is zero.
+            if linkDropArray.count > 0 {
+                linkDropLabel.isHidden = false
+            } else {
+                linkDropLabel.isHidden = true
+            }
+            
+            //Returning the couunt of the objects from the array
             return linkDropArray.count
         }
         return 0
@@ -163,12 +187,25 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LinkDropCell.identifier, for: indexPath) as! LinkDropCell
         
-        if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropAArray.rawValue) {
+        //Storing the data from userdefaaults into a variable and checking for nil value.
+        if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
             do {
+                
+                //Decoding the JSON data and converting to GenerateLinkDrop object
                 if let linkDropArray = try? JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData) {
+                    
+                    //Checking for nil value for amount and timestamp.
                     guard let amount = linkDropArray[indexPath.row].newKeyPair?.amount,
                           let timeStamp = linkDropArray[indexPath.row].newKeyPair?.ts else { return cell }
-                    cell.ammountLabel.text = "Amount: \(amount)"
+                    
+                    let amountInt = Double(amount)
+                    let convertedAmount = amountInt!/1000000000000000000000000
+                    let amountString: String = String(convertedAmount)
+                    
+                    //Setting the amount value to the amountLabel
+                    cell.ammountLabel.text = "Amount: \(amountString) NEAR"
+                    
+                    //Setting the time value to the timeStampLabel
                     cell.assignDateAndTime(timeStamp: timeStamp)
                 }
             } catch {
@@ -180,7 +217,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
     
     //Function for height for cell in the tableview
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 100
     }
     
     //Function for action on selecting any row in the tableview
@@ -192,10 +229,14 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
         //Creating the copy link button in actionsheet
         alert.addAction(UIAlertAction(title: "Copy Link", style: .default, handler: { actionSheet in
             
-            //Checking for nil value in secretkey
-            if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropAArray.rawValue) {
+            //Storing the data from userdefaaults into a variable and checking for nil value.
+            if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
                 do {
+                    
+                    //Decoding the JSON data and converting to GenerateLinkDrop object
                     if let linkDropArray = try? JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData) {
+                        
+                        //Checking for nil value in secretkey.
                         guard let secretKey = linkDropArray[indexPath.row].newKeyPair?.secretKey else { return }
                         
                         //URL for claiming link drop,
@@ -215,9 +256,15 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
             
             //Checking for nil value in accountname and secrekey.
             guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else { return }
-            if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropAArray.rawValue) {
+            
+            //Storing the data from userdefaaults into a variable and checking for nil value.
+            if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
                 do {
+                    
+                    //Decoding the JSON data and converting to GenerateLinkDrop object
                     if var linkDropArray = try? JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData) {
+                        
+                        //Checking for nil value in secretkey.
                         guard let secretKey = linkDropArray[indexPath.row].newKeyPair?.secretKey else { return }
                         
                         //Using the get reclaim near function from NearRestAPI file
@@ -226,20 +273,29 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                             //Using main thread
                             DispatchQueue.main.async {
                                 if success {
+                                    
+                                    //Show the toast message.
                                     self.showToast(message: "Near tokens reclaimed!")
+                                    
+                                    //Remove the object from the array.
                                     linkDropArray.remove(at: indexPath.row)
                                     do {
+                                        
+                                        //Storing the data from userdefaaults into a variable and checking for nil value.
                                         let linkDropData = try? JSONEncoder().encode(linkDropArray)
-                                        UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropAArray.rawValue)
+                                        UserDefaults.standard.set(linkDropData, forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)")
                                     } catch {
                                         print("Error")
                                     }
+                                    
+                                    //Delete rows from the table.
                                     self.tableView.deleteRows(at: [indexPath], with: .fade)
+                                    
+                                    //Reload table.
                                     self.tableView.reloadData()
-                                    if linkDropArray.count == 0 {
-                                        self.linkDropLabel.isHidden = true
-                                    }
                                 } else {
+                                    
+                                    //Show toast message.
                                     self.showToast(message: "Error reclaiming Near tokens. Try Again!")
                                 }
                             }
@@ -250,6 +306,13 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }))
+        
+        //Creating the cancel button in actionSheet.
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        //Present the actionsheet.
         present(alert, animated: true, completion: nil)
     }
 }
