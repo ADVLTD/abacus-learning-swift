@@ -105,7 +105,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                                 let linkDropData = try? JSONEncoder().encode(self.linkDropArray)
                                 
                                 //Userdefaults storage
-                                UserDefaults.standard.set(linkDropData, forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)")
+                                UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropArray.rawValue)
                             } catch {
                                 print("Error")
                             }
@@ -165,7 +165,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //Storing the data from userdefaaults into a variable and checking for nil value.
-        if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
+        if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
             
             //Decoding the JSON data and converting to GenerateLinkDrop object
             let linkDropArray = try! JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData)
@@ -188,7 +188,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: LinkDropCell.identifier, for: indexPath) as! LinkDropCell
         
         //Storing the data from userdefaaults into a variable and checking for nil value.
-        if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
+        if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
             do {
                 
                 //Decoding the JSON data and converting to GenerateLinkDrop object
@@ -230,7 +230,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
         alert.addAction(UIAlertAction(title: "Copy Link", style: .default, handler: { actionSheet in
             
             //Storing the data from userdefaaults into a variable and checking for nil value.
-            if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
+            if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
                 do {
                     
                     //Decoding the JSON data and converting to GenerateLinkDrop object
@@ -258,7 +258,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
             guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else { return }
             
             //Storing the data from userdefaaults into a variable and checking for nil value.
-            if let linkDropData = UserDefaults.standard.data(forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)") {
+            if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
                 do {
                     
                     //Decoding the JSON data and converting to GenerateLinkDrop object
@@ -283,7 +283,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                                         
                                         //Storing the data from userdefaaults into a variable and checking for nil value.
                                         let linkDropData = try? JSONEncoder().encode(linkDropArray)
-                                        UserDefaults.standard.set(linkDropData, forKey: "\(Constants.nearAccountName.rawValue)-\(Constants.nearLinkDropArray.rawValue)")
+                                        UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropArray.rawValue)
                                     } catch {
                                         print("Error")
                                     }

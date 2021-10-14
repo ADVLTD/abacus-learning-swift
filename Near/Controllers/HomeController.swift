@@ -19,7 +19,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //Variables for the Videos
     var videoIdForFunction: String?
-    var videoId = ["01111", "02222", "03333", "04444"]
+    var videoId = ["1991", "2992", "3993", "4994"]
     var videoTitle = ["Near Video 1", "Near Video 2", "Near Video 3", "Near Video 4"]
     var videoURL = [
         "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4",
@@ -156,7 +156,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         navigationController?.pushViewController(settings, animated: true)
     }
     
-    //Action for Video ending.
+    //    //Action for Video ending.
     @objc private func videoDidEnd() {
         
         //Video player removed from view.
@@ -169,63 +169,28 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
               let privateKey = UserDefaults.standard.string(forKey: Constants.nearPrivateKey.rawValue)
         else {
-                  showToast(message: "AccountName or PrivateKey not found.")
-                  return
+            showToast(message: "AccountName or PrivateKey not found.")
+            return
         }
         
-        //Using the viewWatchHistory function to check if the user has already watched the video.
-        NearRestAPI.shared.viewUserWatchHistory(accountName: accountName, videoId: self.videoIdForFunction!) { result in
-            switch result {
+        //Using the RewardUser function to check for video watch history, if the user has watched the video then near is not awarded, if user is watching the video 1st time near will be awarded.
+        NearRestAPI.shared.rewardUser(accountName: accountName, privateKey: privateKey, videoId: self.videoIdForFunction!) { result in
             
-                //if the result from the server is success
-            case .success(let response):
-                
-                //if the response is flase then the user has not watched the video and has to be awarded with near.
-                if response == false {
-                    
-                    //Using the save history function to save the watch history of the currently watched video.
-                    NearRestAPI.shared.saveUserVideoDetails(accountName: accountName, videoId: self.videoIdForFunction!, privateKey: privateKey) { success in
-                       
-                        //if user watch history saved successfully
-                        if success {
-                           
-                            //Using the send token function to send reward to the user for watching the video
-                            NearRestAPI.shared.sendToken(accountName: accountName, videoId: self.videoIdForFunction!, privateKey: privateKey) { success in
-                              
-                                //Using the main thread as there is Ui elements used.
-                                DispatchQueue.main.async {
-                                  
-                                    //if the user gets the near token succesfully
-                                    if success {
-                                        let vc = SettingsController()
-                                        vc.getBalance()
-                                        self.showToast(message: "Near token added to your wallet.")
-                                   
-                                        //if the user gets the near token succesfully
-                                    } else {
-                                        self.showToast(message: "Something went wrong. Please try again")
-                                    }
-                                }
-                            }
-                        
-                            //if user watch history did not save successfully showing error message.
-                        } else {
-                            DispatchQueue.main.async {
-                                self.showToast(message: "Watch history did not save properly. Try again!")
-                            }
-                        }
+            //Using main thread as there is UI operation in this switch.
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if response {
+                        //If the response is true that means the near is added to the user account
+                        self.showToast(message: "Near Token added to your account balance.")
+                    } else {
+                        //If the response is false that means the near is not awarded to the user account
+                        self.showToast(message: "You have already watched this video!")
                     }
-                
-                    //if the response is true then the user has watched the video near should not be awarded.
-                } else if response == true {
-                    DispatchQueue.main.async {
-                        self.showToast(message: "No reward for this video will be awarded as You have already watched this video.")
-                    }
+                case .failure(let error):
+                    //Showing other error messages using this toast.
+                    self.showToast(message: error.localizedDescription)
                 }
-            
-                //if the result from the server is failure
-            case .failure(let error):
-                print(error.localizedDescription)
             }
         }
     }

@@ -217,30 +217,38 @@ class NearRestAPI {
         }.resume()
     }
     
-    //ViewUserWatchHistory Function
-    //This function is called when users watch history for videos has to be checked.
+    //Reward User Function
+    //This function is used to reward user with NEAR for watching video once
     
-    func viewUserWatchHistory(accountName: String, videoId: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func rewardUser(accountName: String, privateKey: String, videoId: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         
         //Url for the rest api server for getting the watch history for the user.
-        guard let url = URL(string: Constants.viewUserWatchHistoryURL.rawValue) else { return }
+        guard let url = URL(string: Constants.rewardUserURL.rawValue) else { return }
         
         //Post Request with content type, body and the accountName and hash parameter.
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
         //Body
         let body: [String: Any] = [
-            "account_id": accountName,
-            "contract":"headstraitdev2.testnet",
-            "method":"checkUserVideoWatchHistory",
-            "params": [ "mainAccount": "headstraitdev2.testnet", "videoId": videoId ]
+            "accountId":accountName,
+            "viewResourceParamObject": [
+                    "method": "checkUserVideoWatchHistory",
+                    "params": ["mainAccount": accountName, "videoId": videoId]
+            ],
+            "privateKey":privateKey,
+            "rewardTokenAmount":"1",
+            "writeResourceParamObject": [
+                    "method": "saveUserVideoDetails",
+                    "params": ["mainAccount": accountName, "videoId": videoId]
+            ]
         ]
         do {
             //Converting the body into JSON readable format by JSONSerializaion.
             request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
         } catch let error {
-            completion(.failure(error.localizedDescription as! Error))
+            completion(.failure(error))
         }
         // Hitting the rest api server with the request.
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -248,107 +256,33 @@ class NearRestAPI {
                 completion(.failure(error as! Error))
                 return
             }
-            //Converting the response from the server into Boolean format
-            if let stringResponse = String(data: data!, encoding: .utf8) {
-                let bool = Bool(stringResponse)
-                completion(.success(bool!))
-            }
-        }.resume()
-    }
-    
-    //SaveUserVideoDetails
-    //This function is called when we have to save the users watch history for the video user has watched recently.
-    
-    func saveUserVideoDetails(accountName: String, videoId: String, privateKey: String, completion: @escaping (Bool) -> Void) {
-        //Url for the rest api server for saving the watch history.
-        guard let url = URL(string: Constants.saveVideoDetailsAndSendTokenURL.rawValue) else { return }
-        //Post Request with content type, body and the accountName and videoID parameter.
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        //Body
-        let body: [String: Any] = [
-            "account_id": accountName,
-            "private_key": privateKey,
-            "contract":"headstraitdev2.testnet",
-            "method":"saveUserVideoDetails",
-            "params":["mainAccount":"headstraitdev2.testnet","videoId": videoId]
-        ]
-        do {
-            //Converting the body into JSON readable format by JSONSerializaion.
-            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        } catch let error {
-            print("Error occured while parsing the body! \(error.localizedDescription)")
-        }
-        // Hitting the rest api server with the request.
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                print("Something went wrong!! \(String(describing: error?.localizedDescription))")
-                return
-            }
+            
             //Converting the response from the server into json readable format.
             if let data = data {
-                do {
-                    //Decoding the json and checking for successfull value.
-                    let success = try? JSONDecoder().decode(SaveVideoDetailsAndSendToken.self, from: data)
-                    if let success = success {
-                        if success.successfull == nil {
-                            completion(false)
-                        } else {
-                            completion(true)
+                
+                //Checking server response for already watched video.
+                let dataString = String(data: data, encoding: .utf8)
+                if dataString == "User has already utilized the resource" {
+                    completion(.success(false))
+                } else {
+                    do {
+                        //Decoding the json and checking for successfull value.
+                        if let jsonData = try? JSONDecoder().decode(RewardUser.self, from: data) {
+                            if jsonData.successfull != nil {
+                                
+                                //If near is added to wallet this is true
+                                completion(.success(true) )
+                            }
+                        } else if let jsonErrorData = try? JSONDecoder().decode(RewardUserError.self, from: data) {
+                            
+                            //Checking or error in server response.
+                            if jsonErrorData.error != nil {
+                                completion(.failure(CustomErrors.lowBalanceError))
+                            }
                         }
+                    } catch let error {
+                        completion(.failure(error))
                     }
-                } catch let error {
-                    print("Error in parsing data!! \(error.localizedDescription)")
-                }
-            }
-        }.resume()
-    }
-    
-    //SendNearToken Function
-    //This function is used to send near tookens to the user after watching a video.
-    
-    func sendToken(accountName: String, videoId: String, privateKey: String, completion: @escaping (Bool) -> Void) {
-        //URL for sending the token
-        guard let url = URL(string: Constants.saveVideoDetailsAndSendTokenURL.rawValue) else { return }
-        //Post Request with content type, body and the accountName and videoID parameter.
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        //Body
-        let body: [String: Any] = [
-            "account_id": accountName,
-            "private_key": privateKey,
-            "contract":"headstraitdev2.testnet",
-            "method":"sendToken",
-            "params":["yoctonearAsU128":"2","walletAddress": accountName]
-        ]
-        do {
-            //Converting the body into JSON readable format by JSONSerializaion.
-            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        } catch let error {
-            print("Error occured while parsing the body! \(error.localizedDescription)")
-        }
-        // Hitting the rest api server with the request.
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                print("Something went wrong!! \(String(describing: error?.localizedDescription))")
-                return
-            }
-            //Converting the response from the server into json readable format.
-            if let data = data {
-                do {
-                    //Decoding the json and checking for successfull value.
-                    let success = try? JSONDecoder().decode(SaveVideoDetailsAndSendToken.self, from: data)
-                    if let success = success {
-                        if success.successfull == nil {
-                            completion(false)
-                        } else {
-                            completion(true)
-                        }
-                    }
-                } catch let error {
-                    print("Error in parsing data!! \(error.localizedDescription)")
                 }
             }
         }.resume()
@@ -432,7 +366,7 @@ class NearRestAPI {
             if let data = data {
                 do {
                     //Decoding the json and checking for successfull value.
-                    let success = try? JSONDecoder().decode(SaveVideoDetailsAndSendToken.self, from: data)
+                    let success = try? JSONDecoder().decode(RewardUser.self, from: data)
                     if let success = success {
                         if success.successfull == nil {
                             completion(false)

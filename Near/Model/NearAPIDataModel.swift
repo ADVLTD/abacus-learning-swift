@@ -142,7 +142,7 @@ struct TransactionResponse: Decodable {
 
 //Data model for JSON object returned from server for Saving Video Details and Sending Token to user Details
 
-struct SaveVideoDetailsAndSendToken: Decodable {
+struct RewardUser: Decodable {
     var successfull: String?
     
     private enum StatusKeys: String, CodingKey {
@@ -160,4 +160,8 @@ struct SaveVideoDetailsAndSendToken: Decodable {
             }
         }
     }
+}
+
+struct RewardUserError: Decodable {
+    var error: String?
 }

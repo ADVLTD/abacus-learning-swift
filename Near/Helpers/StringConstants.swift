@@ -26,4 +26,20 @@ enum Constants: String {
     case saveVideoDetailsAndSendTokenURL = "http://localhost:3000/call"
     case viewActivityURL = "https://explorer.testnet.near.org/transactions/"
     case generateLinkDropURL = "http://localhost:3000/generate-drop"
+    case rewardUserURL = "http://localhost:3000/reward"
+}
+
+
+enum CustomErrors: LocalizedError {
+    case lowBalanceError
+    case dataParsingError
+    
+    var errorDescription: String? {
+        switch self {
+        case .lowBalanceError:
+            return "Master Account has low balance!"
+        case .dataParsingError:
+            return "Error in Parsing the JSON Data!"
+        }
+    }
 }

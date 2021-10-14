@@ -69,20 +69,24 @@ class TransactionStatusController: UIViewController {
     
     //Action for done button
     @objc func doneButtonTapped() {
+        
         //Remove the transaction view
         dismiss(animated: true, completion: nil)
     }
     
     //Action for view activity button
     @objc func viewActivityButtonTapped() {
+        
         //Checking for nil value in hashString.
         guard let hashString = hashString else {
             showToast(message: "Hash String not found.")
             return
         }
+        
         //URL for going to activity page on browser.
         let url = "\(Constants.viewActivityURL.rawValue)\(hashString)"
         if let url = URL(string: url) {
+            
             //Opening the URL in browser.
             UIApplication.shared.open(url)
         }
