@@ -10,9 +10,10 @@ import XCTest
 
 class WatchHistroryAndTransactionAPIUserTests: XCTestCase {
     
-    func test_ViewuserHistoryAPI_WithValidAccountnameAndVideoID_ShouldReturnValidResponse() {
-        let expectation = self.expectation(description: "WithValidAccountnameAndVideoID_ShouldReturnValidResponse")
-        NearRestAPI.shared.viewUserWatchHistory(accountName: "testbhushan1.headstraitdev2.testnet", videoId: "1") { result in
+    func test_WatchHistorySavedHistroyAndSendToken_WithValidVideoID() {
+        let expectation = self.expectation(description: "WatchHistorySavedHistroyAndSendToken_WithValidVideoID")
+        
+        NearRestAPI.shared.rewardUser(accountName: "testaccount0011.headstraitdev2.testnet", privateKey: "ed25519:5T4PruYjciFuJY1LoSJP5yG2K2DXdhgbHAM5oGTKVDKTpuWvnR7oCcw9My9zJAZPHw9jTHXZE9vgs7RyRCfjcTXU", videoId: "000000") { result in
             XCTAssertNotNil(result)
             switch result {
             case .success(let response):
@@ -26,33 +27,19 @@ class WatchHistroryAndTransactionAPIUserTests: XCTestCase {
         waitForExpectations(timeout: 20, handler: nil)
     }
     
-    func test_SaveUserHistoryAPI_WithValidAccountnameAndVideoID_ShouldReturnValidResponse() {
-        let expectation = self.expectation(description: "WithValidAccounntnameAndHash_ShouldReturnValiResponse")
-        NearRestAPI.shared.saveUserVideoDetails(accountName: "test12345.headstraitdev2.testnet", videoId: "22", privateKey: "ed25519:2MJghFQqjgukaERsp1jTtxgXs1iSJQYDd8Ua6W96YQdr32N7Dg5opnHofuBnna9wkaHZKeUARHKEUuj23KdpQ6zp") { result in
+    func test_WatchHistorySavedHistroyAndSendToken_WithInvalidVideoID() {
+        let expectation = self.expectation(description: "WatchHistorySavedHistroyAndSendToken_WithInvalidVideoID")
+        
+        NearRestAPI.shared.rewardUser(accountName: "testaccount0011.headstraitdev2.testnet", privateKey: "ed25519:5T4PruYjciFuJY1LoSJP5yG2K2DXdhgbHAM5oGTKVDKTpuWvnR7oCcw9My9zJAZPHw9jTHXZE9vgs7RyRCfjcTXU", videoId: "000000") { result in
             XCTAssertNotNil(result)
-            print(result)
-            XCTAssertFalse(result)
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 20, handler: nil)
-    }
-    
-    func test_SaveUserHistoryAPI_WithInvalidAccountnameAndVideoID_ShouldReturnInvalidResponse() {
-        let expectation = self.expectation(description: "WithInvalidAccountnameAndVideoID_ShouldReturnInvalidResponse")
-        NearRestAPI.shared.saveUserVideoDetails(accountName: "test12345.headstraitdev2.testnet", videoId: "1", privateKey: "ed25519:2MJghFQqjgukaERsp1jTtxgXs1iSJQYDd8Ua6W96YQdr32N7Dg5opnHofuBnna9wkaHZKeUARHKEUuj23KdpQ6zt") { result in
-            XCTAssertNotNil(result)
-            XCTAssertFalse(result)
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 20, handler: nil)
-    }
-    
-    func test_SendTokenAPI_WithValidAccountnameAndVideoID_ShouldReturnValidResponse() {
-        let expectation = self.expectation(description: "WithValidAccounntnameAndHash_ShouldReturnValiResponse")
-        NearRestAPI.shared.sendToken(accountName: "testbhushan1.headstraitdev2.testnet", videoId: "1", privateKey: "ed25519:2MJghFQqjgukaERsp1jTtxgXs1iSJQYDd8Ua6W96YQdr32N7Dg5opnHofuBnna9wkaHZKeUARHKEUuj23KdpQ6zp") { result in
-            XCTAssertNotNil(result)
-            XCTAssertFalse(result)
-            expectation.fulfill()
+            switch result {
+            case .success(let response):
+                XCTAssertFalse(response)
+                expectation.fulfill()
+            case .failure(let error):
+                XCTAssertNil(error)
+                expectation.fulfill()
+            }
         }
         waitForExpectations(timeout: 20, handler: nil)
     }

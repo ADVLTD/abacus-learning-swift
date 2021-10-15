@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9510BA3F271970CD0016D485 /* CreateAccountUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510BA3E271970CD0016D485 /* CreateAccountUITests.swift */; };
 		95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4B26FDE55D00DD240A /* PassPhraseController.swift */; };
 		95152A4E26FDF35900DD240A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4D26FDF35900DD240A /* HomeController.swift */; };
 		952A06FA271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */; };
@@ -24,8 +25,7 @@
 		95AF483426FD9F9600DE684C /* Near.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95AF483226FD9F9600DE684C /* Near.xcdatamodeld */; };
 		95AF483626FD9F9800DE684C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95AF483526FD9F9800DE684C /* Assets.xcassets */; };
 		95AF483926FD9F9800DE684C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95AF483726FD9F9800DE684C /* LaunchScreen.storyboard */; };
-		95AF484426FD9F9800DE684C /* NearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484326FD9F9800DE684C /* NearTests.swift */; };
-		95AF484E26FD9F9800DE684C /* NearUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484D26FD9F9800DE684C /* NearUITests.swift */; };
+		95AF484E26FD9F9800DE684C /* SignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484D26FD9F9800DE684C /* SignInUITests.swift */; };
 		95AF485026FD9F9800DE684C /* NearUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484F26FD9F9800DE684C /* NearUITestsLaunchTests.swift */; };
 		95AF486226FDAA7E00DE684C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF486126FDAA7E00DE684C /* Extensions.swift */; };
 		95AF486526FDAADA00DE684C /* NearRestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF486426FDAADA00DE684C /* NearRestAPI.swift */; };
@@ -56,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9510BA3E271970CD0016D485 /* CreateAccountUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUITests.swift; sourceTree = "<group>"; };
 		95152A4B26FDE55D00DD240A /* PassPhraseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassPhraseController.swift; sourceTree = "<group>"; };
 		95152A4D26FDF35900DD240A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLinkDropAPIUserTests.swift; sourceTree = "<group>"; };
@@ -76,9 +77,8 @@
 		95AF483826FD9F9800DE684C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95AF483A26FD9F9800DE684C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95AF483F26FD9F9800DE684C /* NearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		95AF484326FD9F9800DE684C /* NearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearTests.swift; sourceTree = "<group>"; };
 		95AF484926FD9F9800DE684C /* NearUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		95AF484D26FD9F9800DE684C /* NearUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUITests.swift; sourceTree = "<group>"; };
+		95AF484D26FD9F9800DE684C /* SignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUITests.swift; sourceTree = "<group>"; };
 		95AF484F26FD9F9800DE684C /* NearUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		95AF486126FDAA7E00DE684C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		95AF486426FDAADA00DE684C /* NearRestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearRestAPI.swift; sourceTree = "<group>"; };
@@ -154,7 +154,6 @@
 		95AF484226FD9F9800DE684C /* NearTests */ = {
 			isa = PBXGroup;
 			children = (
-				95AF484326FD9F9800DE684C /* NearTests.swift */,
 				954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */,
 				954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */,
 				954BF38027142C5F008BABA2 /* AccountActivityAPIUserTests.swift */,
@@ -167,7 +166,8 @@
 		95AF484C26FD9F9800DE684C /* NearUITests */ = {
 			isa = PBXGroup;
 			children = (
-				95AF484D26FD9F9800DE684C /* NearUITests.swift */,
+				95AF484D26FD9F9800DE684C /* SignInUITests.swift */,
+				9510BA3E271970CD0016D485 /* CreateAccountUITests.swift */,
 				95AF484F26FD9F9800DE684C /* NearUITestsLaunchTests.swift */,
 			);
 			path = NearUITests;
@@ -392,7 +392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				954BF38127142C5F008BABA2 /* AccountActivityAPIUserTests.swift in Sources */,
-				95AF484426FD9F9800DE684C /* NearTests.swift in Sources */,
 				954BF37D271417D8008BABA2 /* CreateAPIUserTests.swift in Sources */,
 				954BF37F27141C16008BABA2 /* SignInAPIUserTests.swift in Sources */,
 				954BF383271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift in Sources */,
@@ -405,7 +404,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				95AF485026FD9F9800DE684C /* NearUITestsLaunchTests.swift in Sources */,
-				95AF484E26FD9F9800DE684C /* NearUITests.swift in Sources */,
+				95AF484E26FD9F9800DE684C /* SignInUITests.swift in Sources */,
+				9510BA3F271970CD0016D485 /* CreateAccountUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -59,12 +59,21 @@ class LinkDropCell: UITableViewCell {
         timeLabel.anchor(top: ammountLabel.bottomAnchor, paddingTop: 5, left: contentView.leftAnchor, paddingLeft: 10, right: contentView.rightAnchor, paddingRight: 10, height: 40)
     }
     
+    //Function for converting timestamp from milisecond to standard date format.
     func assignDateAndTime(timeStamp: Double) {
+        
+        //Converting the timestamp from milisecond to minutes.
         let converted = NSDate(timeIntervalSince1970: timeStamp / 1000)
         let dateFormatter = DateFormatter()
+        
+        //Setting the timezone for the device.
         dateFormatter.timeZone = NSTimeZone.local
+        
+        //Setting the format of the date and time to be displayed accordingly.
         dateFormatter.dateFormat = "dd/MMMM/yyyy hh:mm a"
         let time = dateFormatter.string(from: converted as Date)
+        
+        //Setting the date and time converted from timestamp to the timeLabel.
         timeLabel.text = "Created on: \(time)"
     }
 }

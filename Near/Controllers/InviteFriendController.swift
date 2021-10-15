@@ -79,7 +79,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
         if amount > "1" {
             
             //Using the generate link drop function from NearRestAPI file
-            NearRestAPI.shared.generateLinkDrop(accountName: accountName, amount: "\(amount)000000000000000000000000", privateKey: privateKey) { success in
+            NearRestAPI.shared.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
                 
                 //Using main thread.
                 DispatchQueue.main.async {
@@ -198,12 +198,8 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                     guard let amount = linkDropArray[indexPath.row].newKeyPair?.amount,
                           let timeStamp = linkDropArray[indexPath.row].newKeyPair?.ts else { return cell }
                     
-                    let amountInt = Double(amount)
-                    let convertedAmount = amountInt!/1000000000000000000000000
-                    let amountString: String = String(convertedAmount)
-                    
                     //Setting the amount value to the amountLabel
-                    cell.ammountLabel.text = "Amount: \(amountString) NEAR"
+                    cell.ammountLabel.text = "Amount: \(amount) NEAR"
                     
                     //Setting the time value to the timeStampLabel
                     cell.assignDateAndTime(timeStamp: timeStamp)

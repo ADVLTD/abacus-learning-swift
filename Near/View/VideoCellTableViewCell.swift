@@ -59,12 +59,15 @@ class VideoCellTableViewCell: UITableViewCell {
     //Given all the constraints and the background color for the elements displayed on the Home Screen.
     func configureCell() {
         contentView.backgroundColor = UIColor.grey()
+       
         //Video Title Constraints
         contentView.addSubview(videoTitleLabel)
         videoTitleLabel.anchor(top: contentView.topAnchor, paddingTop: 6, left: contentView.leftAnchor, right: contentView.rightAnchor)
+        
         //Video thumbnail Constraints
         contentView.addSubview(thumbNailImageView)
         thumbNailImageView.anchor(top: videoTitleLabel.bottomAnchor, paddingTop: 6, left: contentView.leftAnchor, paddingLeft: 6, right: contentView.rightAnchor, paddingRight: 6, bottom: contentView.bottomAnchor, paddingBottom: 6)
+        
         //Play button Constraints
         thumbNailImageView.addSubview(playButton)
         playButton.anchor(width: 30, height: 30)

@@ -44,6 +44,7 @@ class AccountActivityCell: UITableViewCell {
     //Given all the constraints and the background color for the elements displayed on the Home Screen.
     func configureCell() {
         contentView.backgroundColor = UIColor.grey()
+        
         //ActionKind label constraints
         contentView.addSubview(actionKindLabel)
         actionKindLabel.anchor(top: contentView.topAnchor, paddingTop: 0, left: contentView.leftAnchor, paddingLeft: 32, right: contentView.rightAnchor, paddingRight: 32, height: 40)

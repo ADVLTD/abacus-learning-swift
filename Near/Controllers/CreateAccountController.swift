@@ -150,7 +150,7 @@ class CreateAccountController: UIViewController {
                         self.activityIndicator.removeFromSuperview()
                         
                         //showing alert message for error
-                        self.showAlert(title: "Error", message: "Please check your account name and try again !", actionTitle: "ok")
+                        self.showAlert(title: "Error", message: "Account Name already exists please try again with different account name!", actionTitle: "ok")
                     }
                     
                 //if the result from server is failure
