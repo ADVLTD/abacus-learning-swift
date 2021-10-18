@@ -74,9 +74,13 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getAccountActivity()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         configureNavigationBar()
         configureSettingsController()
-        getAccountActivity()
     }
     
     override func viewWillAppear(_ animated: Bool) {

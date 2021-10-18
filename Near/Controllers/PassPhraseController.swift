@@ -39,6 +39,10 @@ class PassPhraseController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         configurePassphraseController()
     }
     

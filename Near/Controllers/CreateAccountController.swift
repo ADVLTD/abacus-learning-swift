@@ -51,6 +51,11 @@ class CreateAccountController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         configureLoginController()
     }
 
@@ -64,7 +69,7 @@ class CreateAccountController: UIViewController {
         
         //Background color for the page
         view.backgroundColor = UIColor.grey()
-        
+       
         //constraints for the Near logo
         view.addSubview(nearLogo)
         nearLogo.anchor(top: view.topAnchor, paddingTop: 80, width: 250, height: 250)

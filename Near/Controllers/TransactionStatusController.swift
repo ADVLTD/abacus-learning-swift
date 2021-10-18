@@ -61,8 +61,12 @@ class TransactionStatusController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configurePopUpWindow()
         transactionDetails()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        configurePopUpWindow()
     }
     
     //MARK: - Selector Functions
