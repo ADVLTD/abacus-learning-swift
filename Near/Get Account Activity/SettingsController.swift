@@ -94,7 +94,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func inviteFriendButtonTapped() {
         
         //Navigate to InviteFriend controller view
-        let vc = InviteFriendController()
+        let vc = CreateLinkDropController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -150,7 +150,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         //Using the get account activity from NearRestAPI file
-        NearRestAPI.shared.getAccountActivity(accountName: accountName) { activities in
+        AccountActivityAPIs.shared.getAccountActivity(accountName: accountName) { activities in
             
             //Assigning the activities array to the array declared above.
             self.activitiesArray = activities
@@ -171,7 +171,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         if let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) {
             
             //Using the get account balance from NearRestAPI file
-            NearRestAPI.shared.getBalance(accountName: accountName) { balance in
+            AccountActivityAPIs.shared.getBalance(accountName: accountName) { balance in
                 
                 //Using the main thread for UI operation
                 DispatchQueue.main.async {
@@ -239,6 +239,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         vc.hashString = activitiesArray[indexPath.row].hash
+        vc.gasFees = activitiesArray[indexPath.row].args?.gas
         present(vc, animated: true, completion: nil)
     }
 }

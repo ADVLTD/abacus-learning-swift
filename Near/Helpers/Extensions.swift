@@ -7,10 +7,8 @@
 
 import UIKit
 
-//Extension for constraints for ui elements, styling textfields and label
-
+//Extension for constraints for UI elements, styling textfields and label
 extension UIView {
-    
     func anchor(top: NSLayoutYAxisAnchor? = nil, paddingTop: CGFloat? = 0, left: NSLayoutXAxisAnchor? = nil, paddingLeft: CGFloat? = 0, right: NSLayoutXAxisAnchor? = nil, paddingRight: CGFloat? = 0, bottom: NSLayoutYAxisAnchor? = nil, paddingBottom: CGFloat? = 0, width: CGFloat? = nil, height: CGFloat? = nil) {
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -78,9 +76,7 @@ extension UIView {
 }
 
 //Extension for styling textfields
-
 extension UITextField {
-    
     func StyleTextField(placeholder: String, isSecureText: Bool) {
         self.borderStyle = .none
         self.font = UIFont.systemFont(ofSize: 19)
@@ -93,7 +89,6 @@ extension UITextField {
 }
 
 //Extension for UI background color
-
 extension UIColor {
     static func grey() -> UIColor {
         return UIColor(red: 31/255, green: 32/255, blue: 34/255, alpha: 1)
@@ -101,9 +96,7 @@ extension UIColor {
 }
 
 //Extension for Show Toast message
-
 extension UIViewController {
-    
     func showToast(message : String) {
         guard let window = UIApplication.shared.keyWindow else { return }
         let toastLabel = UILabel()
@@ -134,6 +127,7 @@ extension UIViewController {
     }
 }
 
+//Extension for hiding keyboard when tapped on the screen anywhere
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InviteFriendController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CreateLinkDropController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: Properties/Variables
     
@@ -84,7 +84,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
         if amount > "1" {
             
             //Using the generate link drop function from NearRestAPI file
-            NearRestAPI.shared.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
+            GenerateLinkDropAPIs.shared.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
                 
                 //Using main thread.
                 DispatchQueue.main.async {
@@ -269,7 +269,7 @@ class InviteFriendController: UIViewController, UITableViewDataSource, UITableVi
                         guard let secretKey = linkDropArray[indexPath.row].newKeyPair?.secretKey else { return }
                         
                         //Using the get reclaim near function from NearRestAPI file
-                        NearRestAPI.shared.reclaimNear(accountName: accountName, secretKey: secretKey) { success in
+                        GenerateLinkDropAPIs.shared.reclaimNear(accountName: accountName, secretKey: secretKey) { success in
                             
                             //Using main thread
                             DispatchQueue.main.async {

@@ -12,7 +12,7 @@ class SignInController: UIViewController {
     //MARK: - Properties/Variables
     
     //Activity indicator instance to use the loading animation.
-    let activityIndicator = ActivityIndicator()
+    let activityIndicator = LoadingAnimation()
     
     //All the elements used in sign in page are configured using anonymous closure pattern
     let passPhraseContainer = UIView()
@@ -115,7 +115,7 @@ class SignInController: UIViewController {
         activityIndicator.animate()
        
         //Sign In User function called from NearRestApi file.
-        NearRestAPI.shared.signInUser(passPhrase: passPhrase) { result in
+        CreateAccountAPI.shared.signInUser(passPhrase: passPhrase) { result in
             
             //using the main thread for executing the closure as it contains ui elements.
             DispatchQueue.main.async {

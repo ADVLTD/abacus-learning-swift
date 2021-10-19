@@ -10,6 +10,10 @@
 		9510BA3F271970CD0016D485 /* CreateAccountUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510BA3E271970CD0016D485 /* CreateAccountUITests.swift */; };
 		95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4B26FDE55D00DD240A /* PassPhraseController.swift */; };
 		95152A4E26FDF35900DD240A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4D26FDF35900DD240A /* HomeController.swift */; };
+		9520627B271EB043003A7A46 /* CreateAccountAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9520627A271EB043003A7A46 /* CreateAccountAPI.swift */; };
+		95206281271EBEF5003A7A46 /* AccountActivityAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95206280271EBEF5003A7A46 /* AccountActivityAPIs.swift */; };
+		95206283271EBF94003A7A46 /* GenerateLinkDropAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95206282271EBF94003A7A46 /* GenerateLinkDropAPIs.swift */; };
+		95206285271EC04E003A7A46 /* RewardUserAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95206284271EC04E003A7A46 /* RewardUserAPIs.swift */; };
 		952A06FA271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */; };
 		954BF37D271417D8008BABA2 /* CreateAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */; };
 		954BF37F27141C16008BABA2 /* SignInAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */; };
@@ -17,7 +21,7 @@
 		954BF383271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF382271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift */; };
 		955F22552705BF77006D7D6F /* AccountActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F22542705BF77006D7D6F /* AccountActivityCell.swift */; };
 		955F22572705CA64006D7D6F /* TransactionStatusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955F22562705CA64006D7D6F /* TransactionStatusController.swift */; };
-		958F0259270DB7E8003D6706 /* InviteFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F0258270DB7E8003D6706 /* InviteFriendController.swift */; };
+		958F0259270DB7E8003D6706 /* CreateLinkDropController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958F0258270DB7E8003D6706 /* CreateLinkDropController.swift */; };
 		95AF482A26FD9F9600DE684C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF482926FD9F9600DE684C /* AppDelegate.swift */; };
 		95AF482C26FD9F9600DE684C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF482B26FD9F9600DE684C /* SceneDelegate.swift */; };
 		95AF482E26FD9F9600DE684C /* CreateAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF482D26FD9F9600DE684C /* CreateAccountController.swift */; };
@@ -28,10 +32,8 @@
 		95AF484E26FD9F9800DE684C /* SignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484D26FD9F9800DE684C /* SignInUITests.swift */; };
 		95AF485026FD9F9800DE684C /* NearUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484F26FD9F9800DE684C /* NearUITestsLaunchTests.swift */; };
 		95AF486226FDAA7E00DE684C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF486126FDAA7E00DE684C /* Extensions.swift */; };
-		95AF486526FDAADA00DE684C /* NearRestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF486426FDAADA00DE684C /* NearRestAPI.swift */; };
-		95AF486826FDAB7700DE684C /* NearAPIDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF486726FDAB7700DE684C /* NearAPIDataModel.swift */; };
 		95D3B56F270AB94E00568ED3 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D3B56E270AB94E00568ED3 /* StringConstants.swift */; };
-		95DACBC627043565001736AF /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC527043565001736AF /* ActivityIndicator.swift */; };
+		95DACBC627043565001736AF /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC527043565001736AF /* LoadingAnimation.swift */; };
 		95DACBC827043E56001736AF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC727043E56001736AF /* SettingsController.swift */; };
 		95DACBCA270446E0001736AF /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */; };
 		95EF64DE270F180F00D67F0E /* LinkDropCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EF64DD270F180F00D67F0E /* LinkDropCell.swift */; };
@@ -59,6 +61,10 @@
 		9510BA3E271970CD0016D485 /* CreateAccountUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUITests.swift; sourceTree = "<group>"; };
 		95152A4B26FDE55D00DD240A /* PassPhraseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassPhraseController.swift; sourceTree = "<group>"; };
 		95152A4D26FDF35900DD240A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		9520627A271EB043003A7A46 /* CreateAccountAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountAPI.swift; sourceTree = "<group>"; };
+		95206280271EBEF5003A7A46 /* AccountActivityAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivityAPIs.swift; sourceTree = "<group>"; };
+		95206282271EBF94003A7A46 /* GenerateLinkDropAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLinkDropAPIs.swift; sourceTree = "<group>"; };
+		95206284271EC04E003A7A46 /* RewardUserAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardUserAPIs.swift; sourceTree = "<group>"; };
 		952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLinkDropAPIUserTests.swift; sourceTree = "<group>"; };
 		954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAPIUserTests.swift; sourceTree = "<group>"; };
 		954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIUserTests.swift; sourceTree = "<group>"; };
@@ -66,7 +72,7 @@
 		954BF382271469F6008BABA2 /* WatchHistroryAndTransactionAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchHistroryAndTransactionAPIUserTests.swift; sourceTree = "<group>"; };
 		955F22542705BF77006D7D6F /* AccountActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivityCell.swift; sourceTree = "<group>"; };
 		955F22562705CA64006D7D6F /* TransactionStatusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStatusController.swift; sourceTree = "<group>"; };
-		958F0258270DB7E8003D6706 /* InviteFriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendController.swift; sourceTree = "<group>"; };
+		958F0258270DB7E8003D6706 /* CreateLinkDropController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLinkDropController.swift; sourceTree = "<group>"; };
 		95AF482626FD9F9600DE684C /* Near.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Near.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95AF482926FD9F9600DE684C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95AF482B26FD9F9600DE684C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,10 +87,8 @@
 		95AF484D26FD9F9800DE684C /* SignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUITests.swift; sourceTree = "<group>"; };
 		95AF484F26FD9F9800DE684C /* NearUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		95AF486126FDAA7E00DE684C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		95AF486426FDAADA00DE684C /* NearRestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearRestAPI.swift; sourceTree = "<group>"; };
-		95AF486726FDAB7700DE684C /* NearAPIDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearAPIDataModel.swift; sourceTree = "<group>"; };
 		95D3B56E270AB94E00568ED3 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
-		95DACBC527043565001736AF /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		95DACBC527043565001736AF /* LoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		95DACBC727043E56001736AF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
 		95EF64DD270F180F00D67F0E /* LinkDropCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDropCell.swift; sourceTree = "<group>"; };
@@ -116,6 +120,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		95206277271E99D1003A7A46 /* Create Account */ = {
+			isa = PBXGroup;
+			children = (
+				95AF482D26FD9F9600DE684C /* CreateAccountController.swift */,
+				9520627A271EB043003A7A46 /* CreateAccountAPI.swift */,
+				95152A4B26FDE55D00DD240A /* PassPhraseController.swift */,
+			);
+			path = "Create Account";
+			sourceTree = "<group>";
+		};
+		95206278271E9A3F003A7A46 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				95EFA4542701A2E700703744 /* SignInController.swift */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		95206279271E9A85003A7A46 /* Get Account Activity */ = {
+			isa = PBXGroup;
+			children = (
+				95DACBC727043E56001736AF /* SettingsController.swift */,
+				955F22562705CA64006D7D6F /* TransactionStatusController.swift */,
+				955F22542705BF77006D7D6F /* AccountActivityCell.swift */,
+				95206280271EBEF5003A7A46 /* AccountActivityAPIs.swift */,
+			);
+			path = "Get Account Activity";
+			sourceTree = "<group>";
+		};
+		9520627E271EBDC5003A7A46 /* Video Player */ = {
+			isa = PBXGroup;
+			children = (
+				95152A4D26FDF35900DD240A /* HomeController.swift */,
+				95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */,
+				95206284271EC04E003A7A46 /* RewardUserAPIs.swift */,
+			);
+			path = "Video Player";
+			sourceTree = "<group>";
+		};
+		9520627F271EBDE8003A7A46 /* Create Link Drop */ = {
+			isa = PBXGroup;
+			children = (
+				958F0258270DB7E8003D6706 /* CreateLinkDropController.swift */,
+				95EF64DD270F180F00D67F0E /* LinkDropCell.swift */,
+				95206282271EBF94003A7A46 /* GenerateLinkDropAPIs.swift */,
+			);
+			path = "Create Link Drop";
+			sourceTree = "<group>";
+		};
 		95AF481D26FD9F9600DE684C = {
 			isa = PBXGroup;
 			children = (
@@ -139,11 +192,12 @@
 		95AF482826FD9F9600DE684C /* Near */ = {
 			isa = PBXGroup;
 			children = (
+				95206278271E9A3F003A7A46 /* Sign In */,
+				95206277271E99D1003A7A46 /* Create Account */,
+				9520627F271EBDE8003A7A46 /* Create Link Drop */,
+				95206279271E9A85003A7A46 /* Get Account Activity */,
+				9520627E271EBDC5003A7A46 /* Video Player */,
 				95AF486026FDAA2600DE684C /* Resources */,
-				95AF486326FDAABA00DE684C /* API */,
-				95AF485F26FDA9B100DE684C /* View */,
-				95AF485E26FDA9A300DE684C /* Model */,
-				95AF485D26FDA99400DE684C /* Controllers */,
 				95AF485C26FDA98900DE684C /* Helpers */,
 				95AF483226FD9F9600DE684C /* Near.xcdatamodeld */,
 				95AF483A26FD9F9800DE684C /* Info.plist */,
@@ -176,43 +230,11 @@
 		95AF485C26FDA98900DE684C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				95DACBC527043565001736AF /* LoadingAnimation.swift */,
 				95AF486126FDAA7E00DE684C /* Extensions.swift */,
 				95D3B56E270AB94E00568ED3 /* StringConstants.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		95AF485D26FDA99400DE684C /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				95AF482D26FD9F9600DE684C /* CreateAccountController.swift */,
-				95EFA4542701A2E700703744 /* SignInController.swift */,
-				95152A4B26FDE55D00DD240A /* PassPhraseController.swift */,
-				95152A4D26FDF35900DD240A /* HomeController.swift */,
-				95DACBC727043E56001736AF /* SettingsController.swift */,
-				955F22562705CA64006D7D6F /* TransactionStatusController.swift */,
-				958F0258270DB7E8003D6706 /* InviteFriendController.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		95AF485E26FDA9A300DE684C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				95AF486726FDAB7700DE684C /* NearAPIDataModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		95AF485F26FDA9B100DE684C /* View */ = {
-			isa = PBXGroup;
-			children = (
-				95DACBC527043565001736AF /* ActivityIndicator.swift */,
-				95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */,
-				955F22542705BF77006D7D6F /* AccountActivityCell.swift */,
-				95EF64DD270F180F00D67F0E /* LinkDropCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		95AF486026FDAA2600DE684C /* Resources */ = {
@@ -225,14 +247,6 @@
 				95AF483726FD9F9800DE684C /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		95AF486326FDAABA00DE684C /* API */ = {
-			isa = PBXGroup;
-			children = (
-				95AF486426FDAADA00DE684C /* NearRestAPI.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,22 +382,24 @@
 			files = (
 				95AF486226FDAA7E00DE684C /* Extensions.swift in Sources */,
 				95DACBCA270446E0001736AF /* VideoCellTableViewCell.swift in Sources */,
+				95206285271EC04E003A7A46 /* RewardUserAPIs.swift in Sources */,
 				955F22552705BF77006D7D6F /* AccountActivityCell.swift in Sources */,
+				95206281271EBEF5003A7A46 /* AccountActivityAPIs.swift in Sources */,
 				955F22572705CA64006D7D6F /* TransactionStatusController.swift in Sources */,
 				95D3B56F270AB94E00568ED3 /* StringConstants.swift in Sources */,
 				95DACBC827043E56001736AF /* SettingsController.swift in Sources */,
-				958F0259270DB7E8003D6706 /* InviteFriendController.swift in Sources */,
+				958F0259270DB7E8003D6706 /* CreateLinkDropController.swift in Sources */,
 				95AF482E26FD9F9600DE684C /* CreateAccountController.swift in Sources */,
-				95AF486526FDAADA00DE684C /* NearRestAPI.swift in Sources */,
 				95EFA4552701A2E700703744 /* SignInController.swift in Sources */,
-				95DACBC627043565001736AF /* ActivityIndicator.swift in Sources */,
+				95DACBC627043565001736AF /* LoadingAnimation.swift in Sources */,
 				95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */,
 				95AF482A26FD9F9600DE684C /* AppDelegate.swift in Sources */,
 				95152A4E26FDF35900DD240A /* HomeController.swift in Sources */,
 				95EF64DE270F180F00D67F0E /* LinkDropCell.swift in Sources */,
 				95AF482C26FD9F9600DE684C /* SceneDelegate.swift in Sources */,
-				95AF486826FDAB7700DE684C /* NearAPIDataModel.swift in Sources */,
+				95206283271EBF94003A7A46 /* GenerateLinkDropAPIs.swift in Sources */,
 				95AF483426FD9F9600DE684C /* Near.xcdatamodeld in Sources */,
+				9520627B271EB043003A7A46 /* CreateAccountAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

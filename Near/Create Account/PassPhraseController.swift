@@ -84,7 +84,7 @@ class PassPhraseController: UIViewController {
         guard let passPhrase = passphraseTextView.text else { return }
         
         //Sign In User function called from NearRestApi file.
-        NearRestAPI.shared.signInUser(passPhrase: passPhrase) { result in
+        CreateAccountAPI.shared.signInUser(passPhrase: passPhrase) { result in
             
             //using the main thread for executing the closure as it contains ui elements.
             DispatchQueue.main.async {

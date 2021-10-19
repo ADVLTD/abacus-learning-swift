@@ -14,15 +14,21 @@ class TransactionStatusController: UIViewController {
     //Variables used for passing data from settings controller.
     var hashString: String?
     var activity: String?
+    var gasFees: Double?
     
     //All the elements used in settings page are configured using anonymous closure pattern
     let activityContainer = UIView()
     let statusContainer = UIView()
+    let gasFeesContainer = UIView()
     let statusLogo: UIImage! = {
         let button = UIImage(systemName: "exclamationmark.icloud")?.withTintColor(.link, renderingMode: .alwaysOriginal)
         return button
     }()
     let activityLogo: UIImage! = {
+        let button = UIImage(systemName: "doc.text.fill")?.withTintColor(.link, renderingMode: .alwaysOriginal)
+        return button
+    }()
+    let gasFeesLogo: UIImage! = {
         let button = UIImage(systemName: "doc.text.fill")?.withTintColor(.link, renderingMode: .alwaysOriginal)
         return button
     }()
@@ -33,6 +39,12 @@ class TransactionStatusController: UIViewController {
         return label
     }()
     let statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .white
+        return label
+    }()
+    let gasFeesLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         label.textColor = .white
@@ -109,9 +121,14 @@ class TransactionStatusController: UIViewController {
         activityContainer.anchor(top: view.topAnchor, paddingTop: 150, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
         activityContainer.labelContainerView(view: activityContainer, image: activityLogo, labelField: activityLabel)
         
+        //Constraints for gas fees label
+        view.addSubview(gasFeesContainer)
+        gasFeesContainer.anchor(top: activityContainer.bottomAnchor, paddingTop: 30, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
+        gasFeesContainer.labelContainerView(view: gasFeesContainer, image: gasFeesLogo, labelField: gasFeesLabel)
+        
         //Constraints for status label
         view.addSubview(statusContainer)
-        statusContainer.anchor(top: activityContainer.bottomAnchor, paddingTop: 30, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
+        statusContainer.anchor(top: gasFeesContainer.bottomAnchor, paddingTop: 30, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
         statusContainer.labelContainerView(view: statusContainer, image: statusLogo, labelField: statusLabel)
         
         //Constraints for activity button
@@ -140,9 +157,16 @@ class TransactionStatusController: UIViewController {
         
         //Assigning text to activity label.
         activityLabel.text = "Activity: \(activity)"
+        //Assigning text to gasFees label while unwrapping the optional value
+        if let gasFees = gasFees {
+            gasFeesLabel.text = "Gas: \(gasFees) yactoNear"
+        } else if gasFees == nil {
+            gasFeesLabel.text = "Gas: 0 yactoNear"
+        }
+        
         
         //Using the transaction status function from NearRestAPI file
-        NearRestAPI.shared.transactionStatus(accountName: accountName, hash: hashString) { success in
+        AccountActivityAPIs.shared.transactionStatus(accountName: accountName, hash: hashString) { success in
             
             //Using main thread for UI elements
             DispatchQueue.main.async {

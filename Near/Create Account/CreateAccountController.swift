@@ -12,7 +12,7 @@ class CreateAccountController: UIViewController {
     //MARK: - Properties
     
     //All the elements used in Create Account page are configured using anonymous closure pattern
-    let activityIndicator = ActivityIndicator()
+    let activityIndicator = LoadingAnimation()
     let accountNameContainer = UIView()
     let accountNameTextField: UITextField = {
         let tf = UITextField()
@@ -130,7 +130,7 @@ class CreateAccountController: UIViewController {
         activityIndicator.animate()
         
         //Create user function called from NearRestApi file.
-        NearRestAPI.shared.createUser(username: username) { result in
+        CreateAccountAPI.shared.createUser(username: username) { result in
             
             //using the main thread for executing the closure as it contains ui elements.
             DispatchQueue.main.async {

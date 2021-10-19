@@ -178,7 +178,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         //Using the RewardUser function to check for video watch history, if the user has watched the video then near is not awarded, if user is watching the video 1st time near will be awarded.
-        NearRestAPI.shared.rewardUser(accountName: accountName, privateKey: privateKey, videoId: self.videoIdForFunction!) { result in
+        RewardUserAPIs.shared.rewardUser(accountName: accountName, privateKey: privateKey, videoId: self.videoIdForFunction!) { result in
             
             //Using main thread as there is UI operation in this switch.
             DispatchQueue.main.async {

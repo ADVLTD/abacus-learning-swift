@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ActivityIndicator: UIView {
+class LoadingAnimation: UIView {
     
     //MARK: - Properties/Variables
     
