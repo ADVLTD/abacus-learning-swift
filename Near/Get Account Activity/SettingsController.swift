@@ -1,10 +1,3 @@
-//
-//  SettingsController.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 29/09/21.
-//
-
 import UIKit
 
 class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {

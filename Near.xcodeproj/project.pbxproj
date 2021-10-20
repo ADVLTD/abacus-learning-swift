@@ -124,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				95AF482D26FD9F9600DE684C /* CreateAccountController.swift */,
-				9520627A271EB043003A7A46 /* CreateAccountAPI.swift */,
 				95152A4B26FDE55D00DD240A /* PassPhraseController.swift */,
+				9520627A271EB043003A7A46 /* CreateAccountAPI.swift */,
 			);
 			path = "Create Account";
 			sourceTree = "<group>";

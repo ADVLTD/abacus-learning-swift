@@ -1,10 +1,3 @@
-//
-//  CreateAccountAPI.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 19/10/21.
-//
-
 import Foundation
 
 //Data model for the Json object returned from server after creating account.
@@ -19,6 +12,7 @@ struct CreateAccountModel: Codable {
     let message: String?
 }
 
+//Data model for the JSON object returned from the server after signing into account.
 struct SignInModel: Codable {
     let publicKey: String?
     let accountName: String?
@@ -27,20 +21,20 @@ struct SignInModel: Codable {
     let text: String?
 }
 
-class CreateAccountAPI {
+
+class CreateAccountAPI: NSObject {
     //Singleton Object for CreateAccountAPI
     static let shared = CreateAccountAPI()
     
     //Create User Function
     //This Function is called when the user want to create a account.
-    
     func createUser(username: String, completion: @escaping (Result<CreateAccountModel, Error>) -> Void) {
         
         //Url for the rest api server for creating account
         guard let url = URL(string: Constants.createUserURL.rawValue) else { return }
         
         //Post Request with content type, body and the account name parameter.
-        var request = URLRequest(url: url)
+        var request =  URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -85,7 +79,7 @@ class CreateAccountAPI {
     
     //Sign In Function
     //This function is called when the user wants to sign in to his/her account.
-    
+    //NOTE:- THIS IS THE SAME FUNCTION USED TO "SIGNIN USER" IN THE "SIGNINCONTROLLER" PRESENT IN "SIGN IN" FOLDER.
     func signInUser(passPhrase: String, completion: @escaping (Result<SignInModel, Error>) -> Void) {
         
         //Url for the rest api server for signin to account.
@@ -133,6 +127,14 @@ class CreateAccountAPI {
             }
         }.resume()
     }
-    
-    
 }
+
+//extension CreateAccountAPI: URLSessionDelegate{
+//    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+//        if challenge.protectionSpace.host == "172.24.1.1" {
+//            completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
+//        } else {
+//            completionHandler(.performDefaultHandling, nil)
+//        }
+//    }
+//}

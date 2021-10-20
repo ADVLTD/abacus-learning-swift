@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 24/09/21.
-//
-
 import UIKit
 
 class CreateAccountController: UIViewController {
@@ -12,7 +5,7 @@ class CreateAccountController: UIViewController {
     //MARK: - Properties
     
     //All the elements used in Create Account page are configured using anonymous closure pattern
-    let activityIndicator = LoadingAnimation()
+    let loadingAnimation = LoadingAnimation()
     let accountNameContainer = UIView()
     let accountNameTextField: UITextField = {
         let tf = UITextField()
@@ -52,19 +45,14 @@ class CreateAccountController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         configureLoginController()
     }
-
+    
     //MARK: - Configuration Functions
     
     func configureLoginController() {
         //Navigation bar configuration
         navigationItem.title = "Create Account"
-        
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22, weight: .bold)]
         
         //Background color for the page
@@ -91,9 +79,9 @@ class CreateAccountController: UIViewController {
         createAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //constraints for the Loading animation
-        view.addSubview(activityIndicator)
-        activityIndicator.anchor(top: createAccountButton.bottomAnchor, paddingTop: 30, width: 150, height: 40)
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(loadingAnimation)
+        loadingAnimation.anchor(top: createAccountButton.bottomAnchor, paddingTop: 30, width: 150, height: 40)
+        loadingAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //constraints for the sign in button
         view.addSubview(signInButton)
@@ -127,32 +115,32 @@ class CreateAccountController: UIViewController {
         guard let username = accountNameTextField.text?.replacingOccurrences(of: " ", with: ""), !username.isEmpty else { return }
         
         //Loading animation initiated
-        activityIndicator.animate()
+        loadingAnimation.animate()
         
         //Create user function called from NearRestApi file.
         CreateAccountAPI.shared.createUser(username: username) { result in
             
-            //using the main thread for executing the closure as it contains ui elements.
+            //using the main thread for executing the closure as it contains UI elements.
             DispatchQueue.main.async {
                 switch result {
                     
-                //if the result from server is success
+                //if the result from server is success.
                 case .success(let response):
                     
                     //loading animation removed
-                    self.activityIndicator.removeFromSuperview()
+                    self.loadingAnimation.removeFromSuperview()
                     
-                    //checking is passphrase is not empty/nil
+                    //checking if passphrase is not empty/nil
                     if response.passPhrase != nil {
                         
                         //navigate to passphrase screen to show pass phrase
                         self.showPassphraseController(response: response)
                         
-                    //checking if statusCode is not nil then an error has occured
+                    //checking if statusCode is not nil, if it is not nil then an error has occured
                     } else if response.statusCode != nil {
                         
                         //loading animation removed
-                        self.activityIndicator.removeFromSuperview()
+                        self.loadingAnimation.removeFromSuperview()
                         
                         //showing alert message for error
                         self.showAlert(title: "Error", message: "Account Name already exists please try again with different account name!", actionTitle: "ok")
@@ -160,9 +148,8 @@ class CreateAccountController: UIViewController {
                     
                 //if the result from server is failure
                 case .failure(let error):
-                    
                     //loading animation removed
-                    self.activityIndicator.removeFromSuperview()
+                    self.loadingAnimation.removeFromSuperview()
                     
                     //showing alert message for error
                     self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "ok")

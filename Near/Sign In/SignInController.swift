@@ -1,10 +1,3 @@
-//
-//  SignInController.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 27/09/21.
-//
-
 import UIKit
 
 class SignInController: UIViewController {
@@ -12,7 +5,7 @@ class SignInController: UIViewController {
     //MARK: - Properties/Variables
     
     //Activity indicator instance to use the loading animation.
-    let activityIndicator = LoadingAnimation()
+    let loadingAnimation = LoadingAnimation()
     
     //All the elements used in sign in page are configured using anonymous closure pattern
     let passPhraseContainer = UIView()
@@ -46,10 +39,6 @@ class SignInController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         configureSignInController()
     }
     
@@ -83,9 +72,9 @@ class SignInController: UIViewController {
         signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         //constraints for the Loading animation
-        view.addSubview(activityIndicator)
-        activityIndicator.anchor(top: signInButton.bottomAnchor, paddingTop: 30, width: 150, height: 40)
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        view.addSubview(loadingAnimation)
+        loadingAnimation.anchor(top: signInButton.bottomAnchor, paddingTop: 30, width: 150, height: 40)
+        loadingAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     //MARK: - Helper Functions
@@ -112,7 +101,7 @@ class SignInController: UIViewController {
         guard let passPhrase = passPhraseTextField.text, !passPhrase.isEmpty else { return }
        
         //Loading animation initiated
-        activityIndicator.animate()
+        loadingAnimation.animate()
        
         //Sign In User function called from NearRestApi file.
         CreateAccountAPI.shared.signInUser(passPhrase: passPhrase) { result in
@@ -128,7 +117,7 @@ class SignInController: UIViewController {
                     if response.success == true {
                         
                         //loading animation removed
-                        self.activityIndicator.removeFromSuperview()
+                        self.loadingAnimation.removeFromSuperview()
                         
                         //navigate to home screen
                         self.showHomeController()
@@ -142,7 +131,7 @@ class SignInController: UIViewController {
                     } else if response.success == false {
                         
                         //loading animation removed
-                        self.activityIndicator.removeFromSuperview()
+                        self.loadingAnimation.removeFromSuperview()
                        
                         //Show alert message for error message
                         self.showAlert(title: "Error", message: "Account does not exist. Please check your PassPhrase and try again !", actionTitle: "ok")
@@ -152,7 +141,7 @@ class SignInController: UIViewController {
                 case .failure(let error):
                     
                     //loading animation removed
-                    self.activityIndicator.removeFromSuperview()
+                    self.loadingAnimation.removeFromSuperview()
                     
                     //Show alert message for error message
                     self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "ok")

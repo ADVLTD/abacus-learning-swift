@@ -1,10 +1,3 @@
-//
-//  GenerateLinkDropAPIUserTests.swift
-//  NearTests
-//
-//  Created by Bhushan Mahajan on 12/10/21.
-//
-
 import XCTest
 @testable import Near
 

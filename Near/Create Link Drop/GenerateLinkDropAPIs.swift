@@ -1,10 +1,3 @@
-//
-//  GenerateLinkDropAPIs.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 19/10/21.
-//
-
 import Foundation
 
 //Data model for JSON object returned from server for Genrating LinkDrop
@@ -12,7 +5,6 @@ struct GenerateLinkDrop: Codable {
     let success: Bool?
     let newKeyPair: NewKeyPair?
 }
-
 struct NewKeyPair: Codable {
     let publicKey: PublicKey?
     let secretKey: String?
@@ -20,20 +12,18 @@ struct NewKeyPair: Codable {
     let amount: String?
     let ts: Double?
 }
-
 struct PublicKey: Codable {
     let keyType: Int?
     let data: Dictionary<String, Int>?
 }
 
-class GenerateLinkDropAPIs {
 
-    //Singleton Object for NearResrAPI
+class GenerateLinkDropAPIs {
+    //Singleton Object for GenerateLinkDropAPIs
     static let shared = GenerateLinkDropAPIs()
     
     //Generate Link Drop Function
     //This function is used to generate linkdrop in the app.
-    
     func generateLinkDrop(accountName: String, amount: String, privateKey: String, completion: @escaping (Result<GenerateLinkDrop, Error>) -> Void) {
         //Url for the rest api server for generating link drop.
         guard let url = URL(string: Constants.generateLinkDropURL.rawValue) else { return }

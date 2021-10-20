@@ -1,10 +1,3 @@
-//
-//  NearUITestsLaunchTests.swift
-//  NearUITests
-//
-//  Created by Bhushan Mahajan on 24/09/21.
-//
-
 import XCTest
 
 class NearUITestsLaunchTests: XCTestCase {

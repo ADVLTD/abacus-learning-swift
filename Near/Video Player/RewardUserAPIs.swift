@@ -1,10 +1,3 @@
-//
-//  RewardUserAPIs.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 19/10/21.
-//
-
 import Foundation
 
 //Data model for JSON object returned from server for Saving Video Details and Sending Token to user Details
@@ -27,19 +20,18 @@ struct RewardUser: Decodable {
         }
     }
 }
-
 struct RewardUserError: Decodable {
     var error: String?
 }
 
+
+
 class RewardUserAPIs {
-    
-    //Singleton Object for NearResrAPI
+    //Singleton Object for RewardUserAPIs
     static let shared = RewardUserAPIs()
     
     //Reward User Function
     //This function is used to reward user with NEAR for watching video once
-    
     func rewardUser(accountName: String, privateKey: String, videoId: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         
         //Url for the rest api server for getting the watch history for the user.

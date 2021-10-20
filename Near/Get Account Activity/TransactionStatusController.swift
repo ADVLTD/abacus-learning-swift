@@ -1,10 +1,3 @@
-//
-//  PopupView.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 30/09/21.
-//
-
 import UIKit
 
 class TransactionStatusController: UIViewController {
@@ -78,7 +71,7 @@ class TransactionStatusController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        configurePopUpWindow()
+        configureTransactionStatusController()
     }
     
     //MARK: - Selector Functions
@@ -111,7 +104,7 @@ class TransactionStatusController: UIViewController {
     //MARK: - Configuration Functions
     
     //Function for configuration of view.
-    func configurePopUpWindow() {
+    func configureTransactionStatusController() {
         
         //Background color for view
         view.backgroundColor = UIColor.grey()

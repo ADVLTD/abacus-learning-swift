@@ -1,10 +1,3 @@
-//
-//  AccountActivityCell.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 30/09/21.
-//
-
 import UIKit
 
 class AccountActivityCell: UITableViewCell {

@@ -1,10 +1,3 @@
-//
-//  CreateAccountUITests.swift
-//  NearUITests
-//
-//  Created by Bhushan Mahajan on 15/10/21.
-//
-
 import XCTest
 
 class CreateAccountUITests: XCTestCase {

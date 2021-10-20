@@ -1,10 +1,3 @@
-//
-//  InviteFriendController.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 06/10/21.
-//
-
 import UIKit
 
 class CreateLinkDropController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -57,86 +50,13 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        configureController()
-    }
-    
-    //MARK: Selector Functions
-    
-    //Action for generate link drop button
-    @objc func generateLinkDropButtonTapped() {
-        
-        //Checking for nil value in accountname, privatekey.
-        guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
-              let privateKey = UserDefaults.standard.string(forKey: Constants.nearPrivateKey.rawValue) else {
-                  return
-              }
-        
-        //Checking for nil value in amount.
-        guard var amount = amountTextField.text, !amount.isEmpty else {
-            showToast(message: "Please Check the amount and try again!")
-            return
-        }
-        //Checking if the value is greater than 1 Near
-        if amount > "1" {
-            
-            //Using the generate link drop function from NearRestAPI file
-            GenerateLinkDropAPIs.shared.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
-                
-                //Using main thread.
-                DispatchQueue.main.async {
-                    switch success {
-                        
-                        //if the completion is successfull
-                    case .success(let response):
-                        
-                        //if the secretkey is nil
-                        if response.newKeyPair?.secretKey == nil {
-                            self.showToast(message: "Something went wrong. Try again!")
-                        } else {
-                            //if the secretkey is not nil
-                            self.linkDropLabel.isHidden = false
-                            
-                            //Storing the response in an array.
-                            self.linkDropArray.append(response)
-                            
-                            //Storing the array in UserDefaults for maintaining it throught the session.
-                            do {
-                                
-                                //Converting the objects in array into JSON format to store it in userdefaults.
-                                let linkDropData = try? JSONEncoder().encode(self.linkDropArray)
-                                
-                                //Userdefaults storage
-                                UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropArray.rawValue)
-                            } catch {
-                                print("Error")
-                            }
-                            
-                            //Clearing the textffield
-                            self.amountTextField.text = nil
-                            
-                            //Reloading the table to show the data.
-                            self.tableView.reloadData()
-                        }
-                        //if the completion is failure
-                    case .failure(let error):
-                        self.showToast(message: error.localizedDescription)
-                    }
-                }
-            }
-        } else {
-            //If the value is less than 1 Near
-            showToast(message: "The amount Should be greater than 1 Near.")
-        }
+        configureCreateLinkDropController()
     }
     
     //MARK: Configuration Functions
     
     //Function for configuration of view
-    func configureController() {
+    func configureCreateLinkDropController() {
         
         //Background color for view.
         view.backgroundColor = UIColor.grey()
@@ -162,6 +82,66 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
         //Constraints for table view
         view.addSubview(tableView)
         tableView.anchor(top: linkDropLabel.bottomAnchor, paddingTop: 15, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, bottom: view.bottomAnchor, paddingBottom: 50)
+    }
+    
+    //MARK: Selector Functions
+    
+    //Action for generate link drop button
+    @objc func generateLinkDropButtonTapped() {
+        //Checking for nil value in accountname, privatekey.
+        guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue),
+              let privateKey = UserDefaults.standard.string(forKey: Constants.nearPrivateKey.rawValue) else {
+                  return
+              }
+        
+        //Checking for nil value in amount.
+        guard var amount = amountTextField.text, !amount.isEmpty else {
+            showToast(message: "Please Check the amount and try again!")
+            return
+        }
+        //Checking if the value is greater than 1 Near
+        if amount > "1" {
+            //Using the generate link drop function from NearRestAPI file
+            GenerateLinkDropAPIs.shared.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
+                
+                //Using main thread.
+                DispatchQueue.main.async {
+                    switch success {
+                        //if the completion is successfull
+                    case .success(let response):
+                        //if the secretkey is nil
+                        if response.newKeyPair?.secretKey == nil {
+                            self.showToast(message: "Something went wrong. Try again!")
+                        } else {
+                            //if the secretkey is not nil
+                            self.linkDropLabel.isHidden = false
+                            //self.loadingAnimation.isHidden = true
+                            //Storing the response in an array.
+                            self.linkDropArray.append(response)
+                            //Storing the array in UserDefaults for maintaining it throught the session.
+                            do {
+                                //Converting the objects in array into JSON format to store it in userdefaults.
+                                let linkDropData = try? JSONEncoder().encode(self.linkDropArray)
+                                //Userdefaults storage
+                                UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropArray.rawValue)
+                            } catch {
+                                print("Error")
+                            }
+                            //Clearing the textffield
+                            self.amountTextField.text = nil
+                            //Reloading the table to show the data.
+                            self.tableView.reloadData()
+                        }
+                        //if the completion is failure
+                    case .failure(let error):
+                        self.showToast(message: error.localizedDescription)
+                    }
+                }
+            }
+        } else {
+            //If the value is less than 1 Near
+            showToast(message: "The amount Should be greater than 1 Near.")
+        }
     }
     
     //MARK: TableView Functions
@@ -223,26 +203,19 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
     
     //Function for action on selecting any row in the tableview
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         //Using the alert to creating actionsheet
         let alert = UIAlertController(title: "Choose one option", message: nil, preferredStyle: .actionSheet)
-        
         //Creating the copy link button in actionsheet
         alert.addAction(UIAlertAction(title: "Copy Link", style: .default, handler: { actionSheet in
-            
             //Storing the data from userdefaaults into a variable and checking for nil value.
             if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
                 do {
-                    
                     //Decoding the JSON data and converting to GenerateLinkDrop object
                     if let linkDropArray = try? JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData) {
-                        
                         //Checking for nil value in secretkey.
                         guard let secretKey = linkDropArray[indexPath.row].newKeyPair?.secretKey else { return }
-                        
                         //URL for claiming link drop,
                         let url = "https://wallet.testnet.near.org/create/testnet/\(secretKey)"
-                        
                         //Copying the URl to paste board.
                         UIPasteboard.general.string = url
                     }
@@ -254,48 +227,36 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
         
         //Creating the reclaim near button in actionsheet
         alert.addAction(UIAlertAction(title: "Reclaim Near", style: .default, handler: { actionSheet in
-            
             //Checking for nil value in accountname and secrekey.
             guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else { return }
-            
             //Storing the data from userdefaaults into a variable and checking for nil value.
             if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
                 do {
-                    
                     //Decoding the JSON data and converting to GenerateLinkDrop object
                     if var linkDropArray = try? JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData) {
-                        
                         //Checking for nil value in secretkey.
                         guard let secretKey = linkDropArray[indexPath.row].newKeyPair?.secretKey else { return }
-                        
                         //Using the get reclaim near function from NearRestAPI file
                         GenerateLinkDropAPIs.shared.reclaimNear(accountName: accountName, secretKey: secretKey) { success in
-                            
                             //Using main thread
                             DispatchQueue.main.async {
                                 if success {
-                                    
                                     //Show the toast message.
                                     self.showToast(message: "Near tokens reclaimed!")
-                                    
                                     //Remove the object from the array.
                                     linkDropArray.remove(at: indexPath.row)
                                     do {
-                                        
                                         //Storing the data from userdefaaults into a variable and checking for nil value.
                                         let linkDropData = try? JSONEncoder().encode(linkDropArray)
                                         UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropArray.rawValue)
                                     } catch {
                                         print("Error")
                                     }
-                                    
                                     //Delete rows from the table.
                                     self.tableView.deleteRows(at: [indexPath], with: .fade)
-                                    
                                     //Reload table.
                                     self.tableView.reloadData()
                                 } else {
-                                    
                                     //Show toast message.
                                     self.showToast(message: "Error reclaiming Near tokens. Try Again!")
                                 }
@@ -307,12 +268,10 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
                 }
             }
         }))
-        
         //Creating the cancel button in actionSheet.
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
-        
         //Present the actionsheet.
         present(alert, animated: true, completion: nil)
     }

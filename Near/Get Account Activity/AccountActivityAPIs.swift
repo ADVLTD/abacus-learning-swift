@@ -1,10 +1,3 @@
-//
-//  AccountActivityAPIs.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 19/10/21.
-//
-
 import Foundation
 
 //Data model for the JSON object returned from server For Account Activity
@@ -18,19 +11,16 @@ struct AccountActivity: Codable {
     let action_kind: String?
     let args: Args?
 }
-
 struct Args: Codable {
     let gas: Double?
     let deposit: String?
     let access_key: AccessKey?
     let public_key: String?
 }
-
 struct AccessKey: Codable {
     let nonce: Int?
     let permission: Permission?
 }
-
 struct Permission: Codable {
     let permission_kind: String?
 }
@@ -62,14 +52,13 @@ struct TransactionResponse: Decodable {
     }
 }
 
+
 class AccountActivityAPIs {
-    
-    //Singleton Object for NearResrAPI
+    //Singleton Object for AccountActivityAPIs
     static let shared = AccountActivityAPIs()
     
     //Get Account Balance Function
     //This Function is used to fetch the account balance for the current user.
-    
     func getBalance(accountName: String, completion: @escaping (String) -> Void) {
         //URL for getting account balance from server
         let url = "\(Constants.getBalanceURL.rawValue)\(accountName)"
@@ -81,6 +70,7 @@ class AccountActivityAPIs {
             }
             //Converting the data recieved from API into String
             if let stringResponse = String(data: data, encoding: .utf8) {
+                stringResponse.replacingOccurrences(of: "\("")", with: "")
                 completion(stringResponse)
             }
         }.resume()

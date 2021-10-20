@@ -1,10 +1,3 @@
-//
-//  Extensions.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 24/09/21.
-//
-
 import UIKit
 
 //Extension for constraints for UI elements, styling textfields and label

@@ -1,10 +1,3 @@
-//
-//  HomeController.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 24/09/21.
-//
-
 import UIKit
 import AVFoundation
 import AVKit

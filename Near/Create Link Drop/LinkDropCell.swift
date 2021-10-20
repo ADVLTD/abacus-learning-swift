@@ -1,10 +1,3 @@
-//
-//  LinkDropCell.swift
-//  Near
-//
-//  Created by Bhushan Mahajan on 07/10/21.
-//
-
 import UIKit
 
 class LinkDropCell: UITableViewCell {
