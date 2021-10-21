@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9510BA3F271970CD0016D485 /* CreateAccountUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9510BA3E271970CD0016D485 /* CreateAccountUITests.swift */; };
+		9512F97E27213CA600F02FC3 /* ButtonLoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512F97D27213CA600F02FC3 /* ButtonLoadingAnimation.swift */; };
+		9512F9802721428F00F02FC3 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512F97F2721428F00F02FC3 /* LoadingButton.swift */; };
 		95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4B26FDE55D00DD240A /* PassPhraseController.swift */; };
 		95152A4E26FDF35900DD240A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95152A4D26FDF35900DD240A /* HomeController.swift */; };
 		9520627B271EB043003A7A46 /* CreateAccountAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9520627A271EB043003A7A46 /* CreateAccountAPI.swift */; };
@@ -33,7 +35,6 @@
 		95AF485026FD9F9800DE684C /* NearUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF484F26FD9F9800DE684C /* NearUITestsLaunchTests.swift */; };
 		95AF486226FDAA7E00DE684C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF486126FDAA7E00DE684C /* Extensions.swift */; };
 		95D3B56F270AB94E00568ED3 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D3B56E270AB94E00568ED3 /* StringConstants.swift */; };
-		95DACBC627043565001736AF /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC527043565001736AF /* LoadingAnimation.swift */; };
 		95DACBC827043E56001736AF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC727043E56001736AF /* SettingsController.swift */; };
 		95DACBCA270446E0001736AF /* VideoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */; };
 		95EF64DE270F180F00D67F0E /* LinkDropCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EF64DD270F180F00D67F0E /* LinkDropCell.swift */; };
@@ -59,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		9510BA3E271970CD0016D485 /* CreateAccountUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUITests.swift; sourceTree = "<group>"; };
+		9512F97D27213CA600F02FC3 /* ButtonLoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLoadingAnimation.swift; sourceTree = "<group>"; };
+		9512F97F2721428F00F02FC3 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		95152A4B26FDE55D00DD240A /* PassPhraseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassPhraseController.swift; sourceTree = "<group>"; };
 		95152A4D26FDF35900DD240A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		9520627A271EB043003A7A46 /* CreateAccountAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountAPI.swift; sourceTree = "<group>"; };
@@ -88,7 +91,6 @@
 		95AF484F26FD9F9800DE684C /* NearUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		95AF486126FDAA7E00DE684C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		95D3B56E270AB94E00568ED3 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
-		95DACBC527043565001736AF /* LoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
 		95DACBC727043E56001736AF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		95DACBC9270446E0001736AF /* VideoCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCellTableViewCell.swift; sourceTree = "<group>"; };
 		95EF64DD270F180F00D67F0E /* LinkDropCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDropCell.swift; sourceTree = "<group>"; };
@@ -230,9 +232,10 @@
 		95AF485C26FDA98900DE684C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				95DACBC527043565001736AF /* LoadingAnimation.swift */,
 				95AF486126FDAA7E00DE684C /* Extensions.swift */,
 				95D3B56E270AB94E00568ED3 /* StringConstants.swift */,
+				9512F97D27213CA600F02FC3 /* ButtonLoadingAnimation.swift */,
+				9512F97F2721428F00F02FC3 /* LoadingButton.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95AF486226FDAA7E00DE684C /* Extensions.swift in Sources */,
+				9512F97E27213CA600F02FC3 /* ButtonLoadingAnimation.swift in Sources */,
 				95DACBCA270446E0001736AF /* VideoCellTableViewCell.swift in Sources */,
 				95206285271EC04E003A7A46 /* RewardUserAPIs.swift in Sources */,
 				955F22552705BF77006D7D6F /* AccountActivityCell.swift in Sources */,
@@ -388,10 +392,10 @@
 				955F22572705CA64006D7D6F /* TransactionStatusController.swift in Sources */,
 				95D3B56F270AB94E00568ED3 /* StringConstants.swift in Sources */,
 				95DACBC827043E56001736AF /* SettingsController.swift in Sources */,
+				9512F9802721428F00F02FC3 /* LoadingButton.swift in Sources */,
 				958F0259270DB7E8003D6706 /* CreateLinkDropController.swift in Sources */,
 				95AF482E26FD9F9600DE684C /* CreateAccountController.swift in Sources */,
 				95EFA4552701A2E700703744 /* SignInController.swift in Sources */,
-				95DACBC627043565001736AF /* LoadingAnimation.swift in Sources */,
 				95152A4C26FDE55D00DD240A /* PassPhraseController.swift in Sources */,
 				95AF482A26FD9F9600DE684C /* AppDelegate.swift in Sources */,
 				95152A4E26FDF35900DD240A /* HomeController.swift in Sources */,

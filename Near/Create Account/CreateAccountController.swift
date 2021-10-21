@@ -5,7 +5,6 @@ class CreateAccountController: UIViewController {
     //MARK: - Properties
     
     //All the elements used in Create Account page are configured using anonymous closure pattern
-    let loadingAnimation = LoadingAnimation()
     let accountNameContainer = UIView()
     let accountNameTextField: UITextField = {
         let tf = UITextField()
@@ -22,12 +21,13 @@ class CreateAccountController: UIViewController {
         iv.contentMode = .scaleAspectFit
         return iv
     }()
-    let createAccountButton: UIButton = {
-        let button = UIButton(type: .system)
+    let createAccountButton: LoadingButton = {
+        let button = LoadingButton(type: .system)
         button.backgroundColor = .link
         button.setTitle("Create Account", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(createAccountButtonTapped), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.layer.cornerRadius = 10
         return button
     }()
@@ -78,11 +78,6 @@ class CreateAccountController: UIViewController {
         createAccountButton.translatesAutoresizingMaskIntoConstraints = false
         createAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        //constraints for the Loading animation
-        view.addSubview(loadingAnimation)
-        loadingAnimation.anchor(top: createAccountButton.bottomAnchor, paddingTop: 30, width: 150, height: 40)
-        loadingAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
         //constraints for the sign in button
         view.addSubview(signInButton)
         signInButton.anchor(bottom: view.bottomAnchor, paddingBottom: 50, width: 280, height: 35)
@@ -115,7 +110,7 @@ class CreateAccountController: UIViewController {
         guard let username = accountNameTextField.text?.replacingOccurrences(of: " ", with: ""), !username.isEmpty else { return }
         
         //Loading animation initiated
-        loadingAnimation.animate()
+        createAccountButton.startAnimation()
         
         //Create user function called from NearRestApi file.
         CreateAccountAPI.shared.createUser(username: username) { result in
@@ -128,7 +123,7 @@ class CreateAccountController: UIViewController {
                 case .success(let response):
                     
                     //loading animation removed
-                    self.loadingAnimation.removeFromSuperview()
+                    self.createAccountButton.stopAnimation()
                     
                     //checking if passphrase is not empty/nil
                     if response.passPhrase != nil {
@@ -140,7 +135,7 @@ class CreateAccountController: UIViewController {
                     } else if response.statusCode != nil {
                         
                         //loading animation removed
-                        self.loadingAnimation.removeFromSuperview()
+                        self.createAccountButton.stopAnimation()
                         
                         //showing alert message for error
                         self.showAlert(title: "Error", message: "Account Name already exists please try again with different account name!", actionTitle: "ok")
@@ -149,7 +144,7 @@ class CreateAccountController: UIViewController {
                 //if the result from server is failure
                 case .failure(let error):
                     //loading animation removed
-                    self.loadingAnimation.removeFromSuperview()
+                    self.createAccountButton.stopAnimation()
                     
                     //showing alert message for error
                     self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "ok")

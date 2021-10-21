@@ -18,11 +18,12 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
         let button = UIImage(systemName: "paperplane.fill")?.withTintColor(.link, renderingMode: .alwaysOriginal)
         return button
     }()
-    let generateLinkDropButton: UIButton = {
-        let button = UIButton(type: .system)
+    let generateLinkDropButton: LoadingButton = {
+        let button = LoadingButton(type: .system)
         button.setTitle("Generate", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(generateLinkDropButtonTapped), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.backgroundColor = .link
         button.layer.cornerRadius = 10
         return button
@@ -101,6 +102,9 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
         }
         //Checking if the value is greater than 1 Near
         if amount > "1" {
+            
+            generateLinkDropButton.startAnimation()
+            
             //Using the generate link drop function from NearRestAPI file
             GenerateLinkDropAPIs.shared.generateLinkDrop(accountName: accountName, amount: amount, privateKey: privateKey) { success in
                 
@@ -111,6 +115,8 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
                     case .success(let response):
                         //if the secretkey is nil
                         if response.newKeyPair?.secretKey == nil {
+                            self.generateLinkDropButton.stopAnimation()
+                            
                             self.showToast(message: "Something went wrong. Try again!")
                         } else {
                             //if the secretkey is not nil
@@ -131,14 +137,18 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
                             self.amountTextField.text = nil
                             //Reloading the table to show the data.
                             self.tableView.reloadData()
+                            
+                            self.generateLinkDropButton.stopAnimation()
                         }
                         //if the completion is failure
                     case .failure(let error):
+                        self.generateLinkDropButton.stopAnimation()
                         self.showToast(message: error.localizedDescription)
                     }
                 }
             }
         } else {
+            self.generateLinkDropButton.stopAnimation()
             //If the value is less than 1 Near
             showToast(message: "The amount Should be greater than 1 Near.")
         }

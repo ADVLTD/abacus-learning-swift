@@ -4,9 +4,6 @@ class SignInController: UIViewController {
     
     //MARK: - Properties/Variables
     
-    //Activity indicator instance to use the loading animation.
-    let loadingAnimation = LoadingAnimation()
-    
     //All the elements used in sign in page are configured using anonymous closure pattern
     let passPhraseContainer = UIView()
     let passPhraseTextField: UITextField = {
@@ -18,17 +15,18 @@ class SignInController: UIViewController {
         let button = UIImage(systemName: "signature")?.withTintColor(.link, renderingMode: .alwaysOriginal)
         return button
     }()
-    var nearLogo: UIImageView = {
+    let nearLogo: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "nearLogoWhite")
         iv.contentMode = .scaleAspectFit
         return iv
     }()
-    var signInButton: UIButton = {
-        let button = UIButton(type: .system)
+    let signInButton: LoadingButton = {
+        let button = LoadingButton(type: .system)
         button.backgroundColor = .link
         button.setTitle("Sign In", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
         button.layer.cornerRadius = 10
         return button
@@ -70,11 +68,6 @@ class SignInController: UIViewController {
         signInButton.anchor(top: passPhraseTextField.bottomAnchor, paddingTop: 35, width: 200, height: 45)
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        //constraints for the Loading animation
-        view.addSubview(loadingAnimation)
-        loadingAnimation.anchor(top: signInButton.bottomAnchor, paddingTop: 30, width: 150, height: 40)
-        loadingAnimation.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     //MARK: - Helper Functions
@@ -101,7 +94,7 @@ class SignInController: UIViewController {
         guard let passPhrase = passPhraseTextField.text, !passPhrase.isEmpty else { return }
        
         //Loading animation initiated
-        loadingAnimation.animate()
+        signInButton.startAnimation()
        
         //Sign In User function called from NearRestApi file.
         CreateAccountAPI.shared.signInUser(passPhrase: passPhrase) { result in
@@ -117,7 +110,7 @@ class SignInController: UIViewController {
                     if response.success == true {
                         
                         //loading animation removed
-                        self.loadingAnimation.removeFromSuperview()
+                        self.signInButton.stopAnimation()
                         
                         //navigate to home screen
                         self.showHomeController()
@@ -131,7 +124,7 @@ class SignInController: UIViewController {
                     } else if response.success == false {
                         
                         //loading animation removed
-                        self.loadingAnimation.removeFromSuperview()
+                        self.signInButton.stopAnimation()
                        
                         //Show alert message for error message
                         self.showAlert(title: "Error", message: "Account does not exist. Please check your PassPhrase and try again !", actionTitle: "ok")
@@ -141,7 +134,7 @@ class SignInController: UIViewController {
                 case .failure(let error):
                     
                     //loading animation removed
-                    self.loadingAnimation.removeFromSuperview()
+                    self.signInButton.stopAnimation()
                     
                     //Show alert message for error message
                     self.showAlert(title: "Error", message: error.localizedDescription, actionTitle: "ok")
