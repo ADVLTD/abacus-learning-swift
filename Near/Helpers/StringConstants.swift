@@ -6,7 +6,6 @@ enum Constants: String {
     case nearAccountName = "nearAccountName"
     case nearPublicKey = "nearPublicKey"
     case nearPrivateKey = "nearPrivateKey"
-    case nearLinkDropArray = "linkDropArray"
     
     // Url constants
     case getDataFromURL = "//http://34.66.148.111/near-rest-dev/"

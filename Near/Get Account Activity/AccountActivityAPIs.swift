@@ -69,9 +69,8 @@ class AccountActivityAPIs {
                 return
             }
             //Converting the data recieved from API into String
-            if let stringResponse = String(data: data, encoding: .utf8) {
-                stringResponse.replacingOccurrences(of: "\("")", with: "")
-                completion(stringResponse)
+            if let string = String(data: data, encoding: .utf8) {
+                    completion(string)
             }
         }.resume()
     }

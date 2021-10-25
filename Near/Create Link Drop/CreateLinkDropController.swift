@@ -6,6 +6,7 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
     
     //Variable for storing object of type generate link drop
     var linkDropArray = [GenerateLinkDrop]()
+    let accountName = UserDefaults.standard.value(forKey: Constants.nearAccountName.rawValue)
     
     //All the elements used in settings page are configured using anonymous closure pattern
     let amountContainer = UIView()
@@ -52,19 +53,25 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         configureCreateLinkDropController()
+        
+        if let linkDropData = UserDefaults.standard.data(forKey: "\(self.accountName!).linkDropArray") {
+            //Decoding the JSON data and converting to GenerateLinkDrop object
+            let linkDropArray = try! JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData)
+            //Hide the Active Linkdrop label when count is zero.
+            if linkDropArray.count > 0 {
+                self.linkDropArray.append(contentsOf: linkDropArray)
+            }
+        }
     }
     
     //MARK: Configuration Functions
     
     //Function for configuration of view
     func configureCreateLinkDropController() {
-        
         //Background color for view.
         view.backgroundColor = UIColor.grey()
-        
         //Configuration of navigation bar
         navigationItem.title = "Link Drop"
-        
         //Constraints for amount textfield
         view.addSubview(amountContainer)
         amountContainer.anchor(top: view.topAnchor, paddingTop: 150, left: view.leftAnchor, paddingLeft: 32, right: view.rightAnchor, paddingRight: 32, height: 45)
@@ -129,7 +136,7 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
                                 //Converting the objects in array into JSON format to store it in userdefaults.
                                 let linkDropData = try? JSONEncoder().encode(self.linkDropArray)
                                 //Userdefaults storage
-                                UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropArray.rawValue)
+                                UserDefaults.standard.set(linkDropData, forKey: "\(self.accountName!).linkDropArray")
                             } catch {
                                 print("Error")
                             }
@@ -160,7 +167,8 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //Storing the data from userdefaaults into a variable and checking for nil value.
-        if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
+        
+        if let linkDropData = UserDefaults.standard.data(forKey: "\(self.accountName!).linkDropArray") {
             
             //Decoding the JSON data and converting to GenerateLinkDrop object
             let linkDropArray = try! JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData)
@@ -183,7 +191,7 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: LinkDropCell.identifier, for: indexPath) as! LinkDropCell
         
         //Storing the data from userdefaaults into a variable and checking for nil value.
-        if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
+        if let linkDropData = UserDefaults.standard.data(forKey: "\(self.accountName!).linkDropArray") {
             do {
                 
                 //Decoding the JSON data and converting to GenerateLinkDrop object
@@ -218,7 +226,7 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
         //Creating the copy link button in actionsheet
         alert.addAction(UIAlertAction(title: "Copy Link", style: .default, handler: { actionSheet in
             //Storing the data from userdefaaults into a variable and checking for nil value.
-            if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
+            if let linkDropData = UserDefaults.standard.data(forKey: "\(self.accountName!).linkDropArray") {
                 do {
                     //Decoding the JSON data and converting to GenerateLinkDrop object
                     if let linkDropArray = try? JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData) {
@@ -240,7 +248,7 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
             //Checking for nil value in accountname and secrekey.
             guard let accountName = UserDefaults.standard.string(forKey: Constants.nearAccountName.rawValue) else { return }
             //Storing the data from userdefaaults into a variable and checking for nil value.
-            if let linkDropData = UserDefaults.standard.data(forKey: Constants.nearLinkDropArray.rawValue) {
+            if let linkDropData = UserDefaults.standard.data(forKey: "\(self.accountName!).linkDropArray") {
                 do {
                     //Decoding the JSON data and converting to GenerateLinkDrop object
                     if var linkDropArray = try? JSONDecoder().decode([GenerateLinkDrop].self, from: linkDropData) {
@@ -255,10 +263,11 @@ class CreateLinkDropController: UIViewController, UITableViewDataSource, UITable
                                     self.showToast(message: "Near tokens reclaimed!")
                                     //Remove the object from the array.
                                     linkDropArray.remove(at: indexPath.row)
+                                    self.linkDropArray.remove(at: indexPath.row)
                                     do {
                                         //Storing the data from userdefaaults into a variable and checking for nil value.
                                         let linkDropData = try? JSONEncoder().encode(linkDropArray)
-                                        UserDefaults.standard.set(linkDropData, forKey: Constants.nearLinkDropArray.rawValue)
+                                        UserDefaults.standard.set(linkDropData, forKey: "\(self.accountName!).linkDropArray")
                                     } catch {
                                         print("Error")
                                     }

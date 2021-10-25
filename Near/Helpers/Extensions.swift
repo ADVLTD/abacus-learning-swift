@@ -118,6 +118,47 @@ extension UIViewController {
             toastLabel.removeFromSuperview()
         }
     }
+    
+    //Trying to create a public key in RSA to use it to encrypt and decrypt data in app.
+    
+    func checkIfPublicKeyExists() -> Bool {
+        var item: CFTypeRef?
+        let tag = "com.adv.nmde.accountName"
+        return true
+    }
+    
+    func createPublicKey() {
+        var error: Unmanaged<CFError>?
+        if checkIfPublicKeyExists() {
+            print("Key exists!!")
+        } else {
+            let tag = "com.adv.nmde.accountName".data(using: .utf8)
+            let attributes: [String: Any] = [
+                kSecAttrType as String: kSecAttrKeyTypeRSA,
+                kSecAttrKeySizeInBits as String: 2048,
+                kSecPrivateKeyAttrs as String: [kSecAttrIsPermanent as String: true,
+                                                kSecAttrApplicationTag as String: tag
+                                               ]
+            ]
+            do {
+                guard let privateKey = SecKeyCreateRandomKey(attributes as CFDictionary, &error) else {
+                    throw error!.takeRetainedValue() as Error
+                }
+                print(privateKey)
+                guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+                    throw error!.takeRetainedValue() as Error
+                }
+                if let cfData = SecKeyCopyExternalRepresentation(publicKey, &error) {
+                    let data: Data = cfData as Data
+                    print(data.base64EncodedString())
+                } else {
+                    print(error)
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
 
 //Extension for hiding keyboard when tapped on the screen anywhere
