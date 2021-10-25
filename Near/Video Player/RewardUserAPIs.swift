@@ -71,10 +71,9 @@ class RewardUserAPIs {
             
             //Converting the response from the server into json readable format.
             if let data = data {
-                
                 //Checking server response for already watched video.
                 let dataString = String(data: data, encoding: .utf8)
-                if dataString == "User has already utilized the resource" {
+                if dataString == "\"User has already utilized the resource\"" {
                     completion(.success(false))
                 } else {
                     do {

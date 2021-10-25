@@ -46,6 +46,7 @@ class CreateAccountController: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         configureLoginController()
+        createPublicKey()
     }
     
     //MARK: - Configuration Functions

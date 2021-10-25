@@ -12,7 +12,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //Variables for the Videos
     var videoIdForFunction: String?
-    var videoId = ["1991", "2992", "3993", "4994"]
+    var videoId = ["19634636363", "2992", "3993", "4994"]
     var videoTitle = ["Near Video 1", "Near Video 2", "Near Video 3", "Near Video 4"]
     var videoURL = [
         "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4",
@@ -139,10 +139,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         navigationController?.setViewControllers([vc], animated: true)
         
         //Removing all the saved data of user.
+        let accountName = UserDefaults.standard.value(forKey: Constants.nearAccountName.rawValue)
+        UserDefaults.standard.removeObject(forKey: "\(accountName!).linkDropArray")
         UserDefaults.standard.removeObject(forKey: Constants.nearAccountName.rawValue)
         UserDefaults.standard.removeObject(forKey: Constants.nearPublicKey.rawValue)
         UserDefaults.standard.removeObject(forKey: Constants.nearPrivateKey.rawValue)
-        UserDefaults.standard.removeObject(forKey: Constants.nearLinkDropArray.rawValue)
     }
     
     //Action for settings button
@@ -169,7 +170,6 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             showToast(message: "AccountName or PrivateKey not found.")
             return
         }
-        
         //Using the RewardUser function to check for video watch history, if the user has watched the video then near is not awarded, if user is watching the video 1st time near will be awarded.
         RewardUserAPIs.shared.rewardUser(accountName: accountName, privateKey: privateKey, videoId: self.videoIdForFunction!) { result in
             

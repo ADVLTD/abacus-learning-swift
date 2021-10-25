@@ -92,7 +92,7 @@ class SignInController: UIViewController {
         
         //Checking the passphrase is not nil and the textfield is not empty
         guard let passPhrase = passPhraseTextField.text, !passPhrase.isEmpty else { return }
-       
+        
         //Loading animation initiated
         signInButton.startAnimation()
        
