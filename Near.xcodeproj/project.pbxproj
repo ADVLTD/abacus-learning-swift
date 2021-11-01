@@ -16,6 +16,7 @@
 		95206281271EBEF5003A7A46 /* AccountActivityAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95206280271EBEF5003A7A46 /* AccountActivityAPIs.swift */; };
 		95206283271EBF94003A7A46 /* GenerateLinkDropAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95206282271EBF94003A7A46 /* GenerateLinkDropAPIs.swift */; };
 		95206285271EC04E003A7A46 /* RewardUserAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95206284271EC04E003A7A46 /* RewardUserAPIs.swift */; };
+		952780D12726CA1C004FC8D9 /* RSA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952780D02726CA1C004FC8D9 /* RSA.swift */; };
 		952A06FA271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */; };
 		954BF37D271417D8008BABA2 /* CreateAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */; };
 		954BF37F27141C16008BABA2 /* SignInAPIUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */; };
@@ -68,6 +69,7 @@
 		95206280271EBEF5003A7A46 /* AccountActivityAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActivityAPIs.swift; sourceTree = "<group>"; };
 		95206282271EBF94003A7A46 /* GenerateLinkDropAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLinkDropAPIs.swift; sourceTree = "<group>"; };
 		95206284271EC04E003A7A46 /* RewardUserAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardUserAPIs.swift; sourceTree = "<group>"; };
+		952780D02726CA1C004FC8D9 /* RSA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA.swift; sourceTree = "<group>"; };
 		952A06F9271547DC004632E8 /* GenerateLinkDropAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateLinkDropAPIUserTests.swift; sourceTree = "<group>"; };
 		954BF37C271417D8008BABA2 /* CreateAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAPIUserTests.swift; sourceTree = "<group>"; };
 		954BF37E27141C16008BABA2 /* SignInAPIUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIUserTests.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				95D3B56E270AB94E00568ED3 /* StringConstants.swift */,
 				9512F97D27213CA600F02FC3 /* ButtonLoadingAnimation.swift */,
 				9512F97F2721428F00F02FC3 /* LoadingButton.swift */,
+				952780D02726CA1C004FC8D9 /* RSA.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				9512F97E27213CA600F02FC3 /* ButtonLoadingAnimation.swift in Sources */,
 				95DACBCA270446E0001736AF /* VideoCellTableViewCell.swift in Sources */,
 				95206285271EC04E003A7A46 /* RewardUserAPIs.swift in Sources */,
+				952780D12726CA1C004FC8D9 /* RSA.swift in Sources */,
 				955F22552705BF77006D7D6F /* AccountActivityCell.swift in Sources */,
 				95206281271EBEF5003A7A46 /* AccountActivityAPIs.swift in Sources */,
 				955F22572705CA64006D7D6F /* TransactionStatusController.swift in Sources */,
