@@ -9,8 +9,6 @@
 <br />
 
 
-## Reference implementation of Abacus Learning App in Swift
-
 ## ABOUT ABACUS LEARNING
 
 AL is an online learning platform that allows Mobile developers to learn the fundamentals of building mobile crypto apps and get paid in the process.
