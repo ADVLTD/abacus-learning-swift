@@ -3,9 +3,7 @@
 <br />
 <br />
 
-<p align="center">
 ![abaculearnlogo](https://user-images.githubusercontent.com/9660292/154821895-36c1af35-5987-4625-a60e-cdc00a2756f4.svg)
-</p> 
 
 <br />
 <br />
