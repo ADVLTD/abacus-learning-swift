@@ -23,10 +23,10 @@ To achieve this purpose, NEAR provides a developer platform where developers and
 
 To learn more, please go to https://github.com/near
 
-## Contributing
+## CONTRIBUTING
 
 The workflow and details of setup to contribute are described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Getting in Touch
+## GETTING IN TOUCH
 
 Please email info@abaculearn.com 
