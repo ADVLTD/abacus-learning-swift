@@ -18,7 +18,7 @@ AL is an online learning platform that allows Mobile developers to learn the fun
 
 ## Contributing
 
-The workflow and details of setup to contribute are described in [CONTRIBUTING.md](CONTRIBUTING.md), and security policy is described in [SECURITY.md](SECURITY.md).
+The workflow and details of setup to contribute are described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Getting in Touch
 
