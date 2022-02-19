@@ -11,9 +11,8 @@
 
 ## ABOUT ABACUS LEARNING
 
-AL is an online learning platform that allows Mobile developers to learn the fundamentals of building mobile crypto apps and get paid in the process.
+AL is an online learning platform that allows Mobile developers to learn the fundamentals of building mobile crypto apps and get paid in the process. You can learn more here: https://www.abaculearn.com/ 
 
-[WEBSITE-url]: https://www.abaculearn.com/
 
 ## NEAR
 
